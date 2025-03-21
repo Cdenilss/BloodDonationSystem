@@ -1,0 +1,68 @@
+### IDE e Ferramentas ###
+# Visual Studio
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+TestResults/
+
+# Rider
+.idea/
+*.sln.iml
+
+### Build ###
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+*.cache
+*.dotCover
+
+### Dependências ###
+packages/
+.nuget/
+*.nupkg
+node_modules/
+
+### Banco de Dados e Migrações ###
+*.mdf
+*.ldf
+__MigrationHistory/
+
+### Logs e Arquivos Temporários ###
+*.log
+*.tmp
+*.temp
+*.csv
+
+### Configurações Sensíveis ###
+*.pfx
+*.cer
+.env
+local.settings.json
+appsettings.*.json
+appsettings.Development.json
+
+### Docker ###
+.dockerignore
+docker-compose.*.yml
+docker-compose.override.yml
+
+### Testes ###
+*.coverage
+*.coveragexml
+TestResults/
+*.trx
+
+### Específico do Sistema ###
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
