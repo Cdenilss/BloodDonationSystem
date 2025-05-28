@@ -30,3 +30,12 @@
 /Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/obj/Debug/net8.0/BloodDonationSystem.API.pdb
 /Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/obj/Debug/net8.0/BloodDonationSystem.API.genruntimeconfig.cache
 /Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/obj/Debug/net8.0/ref/BloodDonationSystem.API.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.API/obj/Debug/net8.0/BloodDonationSystem.API.sourcelink.json

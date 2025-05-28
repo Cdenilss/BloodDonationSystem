@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "eohQBPbzHkTTZ9VO0yuPGcPBxQsPqgRaaxqj1xqTNiBx86J34JOUOjcgSDnqnaNkyy4sC1YHK/+mpSl5B7KNNg==",
+  "dgSpecHash": "EvjcVJ0FF3Y=",
   "success": true,
   "projectFilePath": "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Core/BloodDonationSystem.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation/12.0.0-preview1/fluentvalidation.12.0.0-preview1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512"
+  ],
   "logs": []
 }

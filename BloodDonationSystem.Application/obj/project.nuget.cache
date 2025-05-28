@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "kMtOtNAbOUWMOlHMs18B4kEtvbFUk+zi1f7PtS4jPEtnqjZmofY9zdecXS3baZObn4YJq2bFMP80rY558FIlng==",
+  "dgSpecHash": "i4CySdErgfg=",
   "success": true,
   "projectFilePath": "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Application/BloodDonationSystem.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation/12.0.0-preview1/fluentvalidation.12.0.0-preview1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.0.0-preview1/fluentvalidation.dependencyinjectionextensions.12.0.0-preview1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512"
+  ],
   "logs": []
 }
