@@ -1,0 +1,22 @@
+using BloodDonationSystem.Application.Common.Mediator;
+using BloodDonationSystem.Application.Models.ResultViewModel;
+using BloodDonationSystem.Core.Entities;
+using BloodDonationSystem.Core.Enum;
+
+namespace BloodDonationSystem.Application.Commands.DonorsCommand.Insert;
+
+public class CreateDonorCommand :IRequest<ResultViewModel<Guid>>
+{
+    public string Name { get; set; }
+    public string Email { get;  set; }
+    public DateTime BirthDate { get;  set; }
+    public GenderEnum Gender { get;  set; }
+    public double Weight { get; set; }
+    public TypeBloodEnum TypeBlood { get; set; }
+    public RhFactorEnum RhFactor { get;  set; }
+    public Address Address { get; set; }
+    
+    public Donor ToEntity()
+        => new (Name, Email, BirthDate, Gender, Weight, TypeBlood, RhFactor,Address);
+    
+}

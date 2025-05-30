@@ -1,6 +1,6 @@
 namespace BloodDonationSystem.Core.Repositories;
 
-public class IRepositoryAddress
+public interface IRepositoryAddress
 {
     
 }
