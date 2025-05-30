@@ -19,8 +19,7 @@ public class DonorRepository : IRepositoryDonor
         var donors = await _context.Donors
             .Where(d => d.IsDeleted == false)
             .Include(d => d.Address)
-            .Include(d => d.TypeBlood)
-            .Include(d => d.RhFactor)
+            .AsNoTracking()
             .ToListAsync();
         return donors;
     }
@@ -47,7 +46,7 @@ public class DonorRepository : IRepositoryDonor
     public async Task Delete(Guid id)
     {
         var donor = await GetById(id);
-            _context.Donors.Remove(donor);
+        donor.SetAsDeleted();
             await _context.SaveChangesAsync();
         
     }

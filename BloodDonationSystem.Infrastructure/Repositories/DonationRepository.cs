@@ -24,7 +24,6 @@ public class DonationRepository : IRepositoryDonation
         var donations = await _context.Donations
             .Where(d => d.IsDeleted == false)
             .Include(d => d.Donor)
-            .Include(d => d.DateDonation)
             .AsNoTracking()
             .ToListAsync();
         return donations;
@@ -54,7 +53,7 @@ public class DonationRepository : IRepositoryDonation
     public async Task Delete(Guid id)
     {
         var donation = await GetById(id);
-            _context.Donations.Remove(donation);
+            donation.SetAsDeleted();
             await _context.SaveChangesAsync();
         
     }
