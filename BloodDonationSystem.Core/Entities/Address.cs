@@ -11,7 +11,7 @@ public class Address : BaseEntity
         Donor = donor;
     }
 
-    public int Id { get;  private set; }
+    public Guid Id { get;  private set; }
     public string Street { get; set; }
     public string City { get; set; }
     public string State { get; set; }
