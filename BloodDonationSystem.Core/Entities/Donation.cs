@@ -9,8 +9,7 @@ public class Donation: BaseEntity
         QuantityMl = quantityMl;
         Donor = donor;
     }
-
-    public Guid Id { get;  private set; }
+    
     public Guid DonorId { get; set; }
     public DateTime DateDonation { get; set; }
     public int QuantityMl { get; set; }

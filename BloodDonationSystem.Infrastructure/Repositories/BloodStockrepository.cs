@@ -21,14 +21,12 @@ public class BloodStockrepository : IRepositoryBloodStock
     {
         var bloodStocks = await _context.BloodStocks
             .Where(bs=>bs.IsDeleted == false)
-            .Include(bs => bs.BloodType)
-            .Include(bs=>bs.RhFactor)
-            .Include(bs=>bs.QuantityMl)
+            .AsNoTracking()
             .ToListAsync();
         return bloodStocks;
     }
 
-    public async Task<BloodStock> GetById(int id)
+    public async Task<BloodStock> GetById(Guid id)
     {
         var bloodStock = await _context.BloodStocks.FirstOrDefaultAsync(bs => bs.Id == id);
         return bloodStock;
@@ -46,10 +44,10 @@ public class BloodStockrepository : IRepositoryBloodStock
         await _context.SaveChangesAsync();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(Guid id)
     {
         var bloodStockDelete = await GetById(id);
-         _context.Remove(bloodStockDelete);
+        bloodStockDelete.SetAsDeleted();
         await _context.SaveChangesAsync();
         
     }

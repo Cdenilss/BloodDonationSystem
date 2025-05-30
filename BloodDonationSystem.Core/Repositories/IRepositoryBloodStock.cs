@@ -5,9 +5,9 @@ namespace BloodDonationSystem.Core.Repositories;
 public interface IRepositoryBloodStock
 {
     Task<List<BloodStock>> GetAll();
-    Task<BloodStock> GetById(int id);
+    Task<BloodStock> GetById(Guid id);
     Task Add(BloodStock bloodStock);
     Task Update(BloodStock bloodStock);
-    Task Delete(int id);
+    Task Delete(Guid id);
     
 }
