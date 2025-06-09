@@ -287,6 +287,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Application/BloodDonationSystem.Application.csproj": {
+                "projectPath": "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Application/BloodDonationSystem.Application.csproj"
+              },
               "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Core/BloodDonationSystem.Core.csproj": {
                 "projectPath": "/Users/carlosdenil/RiderProjects/BloodDonationSystem/BloodDonationSystem.Core/BloodDonationSystem.Core.csproj"
               }
@@ -326,6 +329,10 @@
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[8.0.1, )"
             },
             "SendGrid": {
               "target": "Package",
