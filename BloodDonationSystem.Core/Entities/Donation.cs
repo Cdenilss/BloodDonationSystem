@@ -2,13 +2,14 @@ namespace BloodDonationSystem.Core.Entities;
 
 public class Donation: BaseEntity
 {
-    public Donation(Guid donorId, DateTime dateDonation, int quantityMl, Donor donor)
+    public Donation(Guid donorId, DateTime dateDonation, int quantityMl)
     {
         DonorId = donorId;
         DateDonation = dateDonation;
         QuantityMl = quantityMl;
-        Donor = donor;
+        
     }
+    protected Donation() {}
     
     public Guid DonorId { get; set; }
     public DateTime DateDonation { get; set; }

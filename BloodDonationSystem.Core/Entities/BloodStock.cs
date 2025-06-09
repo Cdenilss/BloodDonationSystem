@@ -9,8 +9,8 @@ public class BloodStock: BaseEntity
         QuantityMl = quantityMl;
     }
     
-    public string BloodType { get; set; }
-    public string RhFactor { get; set; }
-    public int QuantityMl { get; set; }
-    public int MinimumSafeQuantity { get; set; } // ser
+    public string BloodType { get; private set; }
+    public string RhFactor { get; private set; }
+    public int QuantityMl { get; private set;}
+    public int MinimumSafeQuantity { get; private set; } 
 }
