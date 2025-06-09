@@ -2,22 +2,23 @@ namespace BloodDonationSystem.Core.Entities;
 
 public class Address : BaseEntity
 {
-    public Address(string street, string city, string state, string zipCode, Donor donor)
+    public Address(string street, string city, string state, string zipCode)
     {
         Street = street;
         City = city;
         State = state;
         ZipCode = zipCode;
-        Donor = donor;
+        
     }
+    protected Address() { }
 
-    public Guid Id { get;  private set; }
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string ZipCode { get; set; }
+ 
+    public string Street { get; private set; }
+    public string City { get; private set; }
+    public string State { get; private  set; }
+    public string ZipCode { get; private  set; }
     
-    public int DonorId { get; set; }
-    public Donor Donor { get; set; }
+    public Guid DonorId { get; private  set; }
+    public Donor? Donor { get; private  set; }
     
 }
