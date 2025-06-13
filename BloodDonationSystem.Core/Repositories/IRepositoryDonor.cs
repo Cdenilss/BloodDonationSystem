@@ -6,7 +6,9 @@ public interface IRepositoryDonor
 {
     Task<List<Donor>> GetAll();
     Task<Donor> GetById(Guid id);
+    Task<Donor> GetDetailsById(Guid id);
     Task Add(Donor donor);
     Task Update(Donor donor);
     Task Delete(Guid id);
+    
 }

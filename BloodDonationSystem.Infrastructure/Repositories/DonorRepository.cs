@@ -29,6 +29,15 @@ public class DonorRepository : IRepositoryDonor
         var donor= await _context.Donors.FirstOrDefaultAsync(d=> d.Id==id);
         return donor;
     }
+    
+    public async Task<Donor?> GetDetailsById(Guid id)
+    {
+        var donor = await _context.Donors
+            .Include(d => d.Address)
+            .Include(d => d.Donations)
+            .SingleOrDefaultAsync(d => d.Id == id);
+        return donor;
+    }
 
     public async Task Add(Donor donor)
     {
