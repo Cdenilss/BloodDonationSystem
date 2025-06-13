@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonationSystem.Infrastructure.Repositories;
 
-public class BloodStockrepository : IRepositoryBloodStock
+public class BloodStockRepository : IRepositoryBloodStock
 {
         
   private readonly BloodDonationDbContext _context;
-    public BloodStockrepository(BloodDonationDbContext context)
+    public BloodStockRepository(BloodDonationDbContext context)
     {
         _context = context;
     }
