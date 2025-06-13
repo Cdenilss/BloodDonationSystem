@@ -14,9 +14,13 @@ public class CreateDonorCommand :IRequest<ResultViewModel<Guid>>
     public double Weight { get; set; }
     public TypeBloodEnum TypeBlood { get; set; }
     public RhFactorEnum RhFactor { get;  set; }
-    public Address Address { get; set; }
     
-    public Donor ToEntity()
-        => new (Name, Email, BirthDate, Gender, Weight, TypeBlood, RhFactor,Address);
+    public string Cep { get; set; }
+    public string AddressNumber { get; set; }
+    public string? AddressComplement { get; set; }
+
+    
+    public Donor ToEntity(Address address)
+        => new (Name, Email, BirthDate, Gender, Weight, TypeBlood, RhFactor,address);
     
 }
