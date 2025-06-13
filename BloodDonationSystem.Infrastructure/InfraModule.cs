@@ -11,10 +11,12 @@ namespace BloodDonationSystem.Infrastructure;
 
 public static class InfraModule
 {
-    public static IServiceCollection AddInfrastrucutre(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddRepositoryies();
+     
         services.AddDatabase(configuration);
+        services.AddRepositoryies();
+        services.AddExternalServices(configuration);
         return services;
     }
     
@@ -26,16 +28,15 @@ public static class InfraModule
         return services;
         
     }
-    private static IServiceCollection AddExternalServices(this IServiceCollection services)
+    private static IServiceCollection AddExternalServices(this IServiceCollection services, IConfiguration configuration)
     {
-        
-        services.AddHttpClient("ViaCEP", client =>
+        var viaCepBaseUrl = configuration.GetSection("ExternalServices:ViaCep:BaseUrl").Value;
+        if (string.IsNullOrEmpty(viaCepBaseUrl))
         {
-            client.BaseAddress = new Uri("https://viacep.com.br/ws/");
-        });
-        
+            throw new InvalidOperationException("URL base para o serviço ViaCep não encontrada.");
+        }
+        services.AddHttpClient("ViaCep", client => { client.BaseAddress = new Uri(viaCepBaseUrl); });
         services.AddScoped<IViaCepService, ViaCepService>();
-
         return services;
     }
     public static IServiceCollection AddRepositoryies(this IServiceCollection services)
@@ -43,6 +44,7 @@ public static class InfraModule
         services.AddScoped<IRepositoryDonor,DonorRepository>();
         services.AddScoped<IRepositoryDonation,DonationRepository>();
         services.AddScoped<IRepositoryAddress, AddressRepository>();
+        services.AddScoped<IRepositoryBloodStock, BloodStockRepository>(); 
         return services;
     }
 }
