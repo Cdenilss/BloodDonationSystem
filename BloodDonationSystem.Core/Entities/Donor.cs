@@ -19,12 +19,6 @@ public class Donor : BaseEntity
     
     protected  Donor()
     {
-        
-        Name = string.Empty; 
-        Email = string.Empty;
-        Donations = new List<Donation>();
-        Address = null!; 
-        
     }
 
 
