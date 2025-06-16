@@ -10,6 +10,11 @@ public class GetAllDonorQueryHandler : IRequestHandler<GetAllDonorQuery, ResultV
     
     private readonly IRepositoryDonor _repository;
     
+    public GetAllDonorQueryHandler(IRepositoryDonor repository)
+    {
+        _repository = repository;
+    }
+    
     public async Task<ResultViewModel<List<DonorItemViewModel>>> Handle(GetAllDonorQuery request, CancellationToken cancellationToken)
     {
         var donors = await _repository.GetAll();
