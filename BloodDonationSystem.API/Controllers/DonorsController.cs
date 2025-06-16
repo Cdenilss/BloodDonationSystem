@@ -47,7 +47,7 @@ public class DonorsController: ControllerBase
             return Ok(result);
     }
     
-    [HttpGet("{email}")]
+    [HttpGet("GetDonorByEmail")]
     public async Task<IActionResult> GetDonorByEmail(string email)
     {
         var result = await _mediator.SendWithResponse(new GetDonorByEmailQuery(email));
@@ -75,7 +75,7 @@ public class DonorsController: ControllerBase
         return CreatedAtAction(nameof(GetDonorById), new { id = result.Data }, command);
     }
     
-    [HttpPut("{id}")]
+    [HttpPut("{search}")]
     
     public async Task<IActionResult> UpdateDonor(DonorPutCommand command)
     {
