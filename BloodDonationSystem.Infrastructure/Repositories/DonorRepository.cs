@@ -18,7 +18,7 @@ public class DonorRepository : IRepositoryDonor
     {
         var donors = await _context.Donors
             .Where(d => d.IsDeleted == false)
-            .Include(d => d.Address)
+            
             .AsNoTracking()
             .ToListAsync();
         return donors;
@@ -29,7 +29,14 @@ public class DonorRepository : IRepositoryDonor
         var donor= await _context.Donors.FirstOrDefaultAsync(d=> d.Id==id);
         return donor;
     }
-    
+
+    public async Task<Donor> GetDonorByEmail(string email)
+    {
+        var donor = await _context.Donors
+            .FirstOrDefaultAsync(d => d.Email == email && d.IsDeleted == false);
+        return donor;
+    }
+
     public async Task<Donor?> GetDetailsById(Guid id)
     {
         var donor = await _context.Donors
