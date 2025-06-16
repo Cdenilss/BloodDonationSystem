@@ -1,7 +1,11 @@
+using BloodDonationSystem.Application.Commands.DonorsCommand.Delete;
 using BloodDonationSystem.Application.Commands.DonorsCommand.Insert;
+using BloodDonationSystem.Application.Commands.DonorsCommand.Put;
 using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Models.DTO;
 using BloodDonationSystem.Application.Models.ResultViewModel;
+using BloodDonationSystem.Application.Queries.DonorsQueries.GetAll;
+using BloodDonationSystem.Application.Queries.DonorsQueries.GetByEmail;
 using BloodDonationSystem.Application.Queries.DonorsQueries.GetById;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +25,12 @@ public class DonorsController: ControllerBase
     
     public async Task<IActionResult> GetAllDonors()
     {
-        return Ok();
+        var result = await _mediator.SendWithResponse(new GetAllDonorQuery());
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
+        return Ok(result);
     }
     
 
@@ -37,7 +46,20 @@ public class DonorsController: ControllerBase
         }
             return Ok(result);
     }
+    
+    [HttpGet("{email}")]
+    public async Task<IActionResult> GetDonorByEmail(string email)
+    {
+        var result = await _mediator.SendWithResponse(new GetDonorByEmailQuery(email));
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
         
+        return Ok(result);
+    }
+    
     
     
     [HttpPost]
@@ -53,5 +75,33 @@ public class DonorsController: ControllerBase
         return CreatedAtAction(nameof(GetDonorById), new { id = result.Data }, command);
     }
     
+    [HttpPut("{id}")]
+    
+    public async Task<IActionResult> UpdateDonor(DonorPutCommand command)
+    {
+        var result = await _mediator.SendWithResponse(command);
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
+        
+        return NoContent();
+    }
+    
+    [HttpDelete]
+    public async Task<IActionResult> DeleteDonor( string email)
+    {
+        var result = await _mediator.SendWithResponse(new DeleteDonorCommand(email));
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
+        
+        return NoContent();
+        
+        
+    }
 }
 
