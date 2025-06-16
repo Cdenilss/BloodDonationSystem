@@ -7,7 +7,7 @@ public class DonorItemViewModel
 {
     public DonorItemViewModel(Guid id,string name, TypeBloodEnum typeBlood, RhFactorEnum rhFactor)
     {
-        Id = Id;
+        Id = id;
         Name = name;
         TypeBlood = typeBlood;
         RhFactor = rhFactor;
