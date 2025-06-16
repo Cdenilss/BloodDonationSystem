@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\Donation\" />
-    <Folder Include="Commands\DonorsCommand\Delete\" />
     <Folder Include="Validators\DonorValidator\" />
   </ItemGroup>
 
