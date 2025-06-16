@@ -33,7 +33,9 @@ public class DonorRepository : IRepositoryDonor
     public async Task<Donor> GetDonorByEmail(string email)
     {
         var donor = await _context.Donors
-            .FirstOrDefaultAsync(d => d.Email == email && d.IsDeleted == false);
+            .Include(d => d.Address)
+            .Include(d => d.Donations)
+            .FirstOrDefaultAsync(d => d.Email== email);
         return donor;
     }
 
