@@ -30,4 +30,14 @@ public class Address : BaseEntity
     public Guid DonorId { get; private  set; }
     public Donor? Donor { get; private  set; }
     
+    public void Update(string street, string city, string state, string zipCode, string number, string? complement, string district)
+    {
+        Street = street;
+        City = city;
+        State = state;
+        ZipCode = zipCode;
+        Number = number;
+        Complement = complement;
+        District = district;
+    }
 }

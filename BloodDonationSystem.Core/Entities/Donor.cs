@@ -32,4 +32,12 @@ public class Donor : BaseEntity
     public List<Donation> Donations { get; private set; }
     public Address Address { get; private set; }
     public Guid AddressId { get; set; }
+    
+    
+    public void Update(string name, string email)
+    {
+        Name = name;
+        Email = email;
+        
+    }
 }
