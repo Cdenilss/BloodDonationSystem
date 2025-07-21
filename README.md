@@ -1,8 +1,4 @@
-Claro! Com base em tudo que construímos e discutimos, preparei um README.md completo para o seu projeto. Ele destaca não apenas as funcionalidades, mas também a arquitetura e os padrões de design que você implementou, o que é ótimo para demonstrar a qualidade do seu trabalho no GitHub.
 
-É só copiar e colar o conteúdo abaixo em um novo arquivo chamado README.md na raiz do seu projeto.
-
-Markdown
 
 # 🩸 BloodDonationSystem - Sistema de Gestão de Doação de Sangue
 
