@@ -11,23 +11,25 @@ public static class MediatorExtensions
     {
         services.AddScoped<IMediator, Mediator>();
 
-        var types = assemblyToScan.GetTypes().Where(t => !t.IsAbstract && !t.IsInterface);
+        var types = assemblyToScan
+            .GetTypes()
+            .Where(t => t is { IsClass: true, IsAbstract: false } && !t.IsGenericType);
 
-        foreach (var type in types)
+        foreach (var implementationType in types)
         {
-            var interfaces = type.GetInterfaces();
-            foreach (var iface in interfaces)
+            var implementedInterfaces = implementationType.GetInterfaces();
+
+            foreach (var serviceType in implementedInterfaces)
             {
-                if (iface.IsGenericType)
+                if (!serviceType.IsGenericType) continue;
+
+                var genericDef = serviceType.GetGenericTypeDefinition();
+
+                if (genericDef == typeof(IRequestHandler<>) ||
+                    genericDef == typeof(IRequestHandler<,>) ||
+                    genericDef == typeof(INotificationHandler<>))
                 {
-                    var genericDef = iface.GetGenericTypeDefinition();
-                    if (genericDef == typeof(IRequestHandler<>) ||
-                        genericDef == typeof(IRequestHandler<,>) ||
-                        genericDef == typeof(INotificationHandler<>) ||
-                        genericDef == typeof(IPipelineBehavior<,>))
-                    {
-                        services.AddScoped(iface, type);
-                    }
+                    services.AddScoped(serviceType, implementationType);
                 }
             }
         }
