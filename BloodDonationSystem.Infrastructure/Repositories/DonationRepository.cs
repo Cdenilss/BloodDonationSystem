@@ -57,4 +57,12 @@ public class DonationRepository : IRepositoryDonation
             await _context.SaveChangesAsync();
         
     }
+
+    public async Task<Donation?> GetLastByDonorIdAsync(Guid donorId)
+    {
+        return await _context.Donations
+            .Where(d => d.DonorId == donorId && d.IsDeleted == false)
+            .OrderByDescending(d => d.DateDonation)
+            .FirstOrDefaultAsync();
+    }
 }
