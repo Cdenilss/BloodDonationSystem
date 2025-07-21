@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Models.ResultViewModel;
 using BloodDonationSystem.Core.Entities;
