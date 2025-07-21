@@ -9,4 +9,5 @@ public interface IRepositoryDonation
     Task <List<Donation>> GetByDonorId(Guid donorId);
     Task Add(Donation donation);
     Task Delete(Guid id);
+    Task<Donation?> GetLastByDonorIdAsync(Guid donorId);
 }
