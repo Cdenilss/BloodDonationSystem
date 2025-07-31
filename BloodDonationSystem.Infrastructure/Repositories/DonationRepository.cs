@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonationSystem.Infrastructure.Repositories;
 
-public class DonationRepository : IRepositoryDonation
+public class DonationRepository : IDonationRepository
 {
      
     private readonly BloodDonationDbContext _context;
-    private readonly IRepositoryDonor _donorRepository;
+    private readonly IDonorRepository _donorRepository;
 
    
   
-    public DonationRepository(BloodDonationDbContext context, IRepositoryDonor donorRepository)
+    public DonationRepository(BloodDonationDbContext context, IDonorRepository donorRepository)
     {
         _context = context;
         _donorRepository = donorRepository;
@@ -47,7 +47,7 @@ public class DonationRepository : IRepositoryDonation
     public async Task Add(Donation donation)
     {
         await _context.Donations.AddAsync(donation);
-        await _context.SaveChangesAsync();
+        
     }
 
     public async Task Delete(Guid id)

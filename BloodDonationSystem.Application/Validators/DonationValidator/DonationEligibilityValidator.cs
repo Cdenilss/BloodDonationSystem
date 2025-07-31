@@ -7,9 +7,9 @@ namespace BloodDonationSystem.Application.Validators.DonationValidator;
 
 public class DonationEligibilityValidator: IDonationEligibilityValidator
 {
-    private readonly IRepositoryDonation _donationRepository;
+    private readonly IDonationRepository _donationRepository;
 
-    public DonationEligibilityValidator(IRepositoryDonation donationRepository)
+    public DonationEligibilityValidator(IDonationRepository donationRepository)
     {
         _donationRepository = donationRepository;
     }

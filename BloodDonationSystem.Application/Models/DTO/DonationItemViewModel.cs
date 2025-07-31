@@ -11,7 +11,7 @@ public class DonationItemViewModel
     
     public RhFactorEnum RhFactor { get; private set; }
     
-    public TypeBloodEnum BloodType { get; private set; }
+    public BloodTypeEnum BloodType { get; private set; }
 
 
 
@@ -23,7 +23,7 @@ public static DonationItemViewModel FromEntity(Donation donation)
             DateDonation = donation.DateDonation,
             QuantityMl = donation.QuantityMl,
             RhFactor = donation.Donor.RhFactor,
-            BloodType = donation.Donor.TypeBlood
+            BloodType = donation.Donor.BloodType
             
         };
     }

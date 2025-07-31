@@ -6,9 +6,9 @@ namespace BloodDonationSystem.Application.Commands.DonationsCommand.Delete;
 
 public class DeleteDonationCommandHandler : IRequestHandler<DeleteDonationCommand, ResultViewModel>
 {
-    private readonly IRepositoryDonation _donationRepository;
+    private readonly IDonationRepository _donationRepository;
 
-    public DeleteDonationCommandHandler(IRepositoryDonation donationRepository)
+    public DeleteDonationCommandHandler(IDonationRepository donationRepository)
     {
         _donationRepository = donationRepository;
     }
