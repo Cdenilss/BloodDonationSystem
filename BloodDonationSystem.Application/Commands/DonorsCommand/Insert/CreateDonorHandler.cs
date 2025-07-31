@@ -9,10 +9,10 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Insert;
 
 public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultViewModel<Guid>>
 {
-    private readonly IRepositoryDonor _donorRepository;
+    private readonly IDonorRepository _donorRepository;
     private readonly IViaCepService _viaCepService;
 
-    public CreateDonorHandler(IRepositoryDonor donorRepository, IViaCepService viaCepService)
+    public CreateDonorHandler(IDonorRepository donorRepository, IViaCepService viaCepService)
     {
         _donorRepository = donorRepository;
         _viaCepService = viaCepService;

@@ -13,7 +13,7 @@ public class CreateDonorCommand :IRequest<ResultViewModel<Guid>>
     public DateTime BirthDate { get;  set; }
     public GenderEnum Gender { get;  set; }
     public double Weight { get; set; }
-    public TypeBloodEnum TypeBlood { get; set; }
+    public BloodTypeEnum BloodType { get; set; }
     public RhFactorEnum RhFactor { get;  set; }
     
     public string Cep { get; set; }
@@ -22,6 +22,6 @@ public class CreateDonorCommand :IRequest<ResultViewModel<Guid>>
 
     
     public Donor ToEntity(Address address)
-        => new (Name, Email, BirthDate, Gender, Weight, TypeBlood, RhFactor,address);
+        => new (Name, Email, BirthDate, Gender, Weight, BloodType, RhFactor,address);
     
 }
