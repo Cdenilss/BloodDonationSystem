@@ -1,16 +1,30 @@
+using BloodDonationSystem.Core.Enum;
+
 namespace BloodDonationSystem.Core.Entities;
 
 public class BloodStock: BaseEntity
 {
-    public BloodStock(string bloodType, string rhFactor, int quantityMl)
+    public BloodStock(BloodTypeEnum bloodType, RhFactorEnum rhFactor, int quantityMl)
     {
         BloodType = bloodType;
         RhFactor = rhFactor;
         QuantityMl = quantityMl;
     }
     
-    public string BloodType { get; private set; }
-    public string RhFactor { get; private set; }
-    public int QuantityMl { get; private set;}
-    public int MinimumSafeQuantity { get; private set; } 
+    public BloodTypeEnum BloodType { get; private set; }
+    public RhFactorEnum RhFactor { get; private set; }
+    public int QuantityMl { get; set;}
+    public int MinimumSafeQuantity { get; set; } 
+    
+    
+    // public void InputBloodStock(int quantity)
+    // {
+    //     QuantityMl += quantity;
+    // }
+    //
+    // public void OutputBloodStock(int quantity)
+    // {
+    //     QuantityMl -= quantity;
+    // }
 }
+

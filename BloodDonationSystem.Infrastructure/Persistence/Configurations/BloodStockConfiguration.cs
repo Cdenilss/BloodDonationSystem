@@ -10,8 +10,11 @@ public class BloodStockConfiguration : IEntityTypeConfiguration<BloodStock>
     {
         builder.ToTable("BloodStocks");
         
-        // Chave Primária
-        builder.HasKey(bs => bs.Id);
+            builder.ToTable("BloodStocks");
+            
+             // Define a chave primária composta
+            builder.HasKey(bs => new { bs.BloodType, bs.RhFactor });
+        
         
         // Configurações das Propriedades
         builder.Property(bs => bs.BloodType)
