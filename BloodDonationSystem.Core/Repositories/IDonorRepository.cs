@@ -2,7 +2,7 @@ using BloodDonationSystem.Core.Entities;
 
 namespace BloodDonationSystem.Core.Repositories;
 
-public interface IRepositoryDonor
+public interface IDonorRepository
 {
     Task<List<Donor>> GetAll();
     Task<Donor> GetById(Guid id);
@@ -12,5 +12,4 @@ public interface IRepositoryDonor
     Task Add(Donor donor);
     Task Update(Donor donor);
     Task Delete(Guid id);
-    
 }

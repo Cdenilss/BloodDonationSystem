@@ -1,6 +1,6 @@
 namespace BloodDonationSystem.Core.Enum;
 
-public enum TypeBloodEnum
+public enum BloodTypeEnum
 {
     A=1,
     B=2,
