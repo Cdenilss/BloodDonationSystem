@@ -16,6 +16,7 @@ public static class InfraModule
      
         services.AddDatabase(configuration);
         services.AddRepositoryies();
+        services.AddUnitOfWork();
         services.AddExternalServices(configuration);
         return services;
     }
@@ -41,10 +42,18 @@ public static class InfraModule
     }
     public static IServiceCollection AddRepositoryies(this IServiceCollection services)
     {
-        services.AddScoped<IRepositoryDonor,DonorRepository>();
-        services.AddScoped<IRepositoryDonation,DonationRepository>();
-        services.AddScoped<IRepositoryAddress, AddressRepository>();
-        services.AddScoped<IRepositoryBloodStock, BloodStockRepository>(); 
+        services.AddScoped<IDonorRepository,DonorRepository>();
+        services.AddScoped<IDonationRepository,DonationRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<IBloodStockRepository, BloodStockRepository>(); 
         return services;
+    }
+
+    public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+    {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        return services;
+        
     }
 }
