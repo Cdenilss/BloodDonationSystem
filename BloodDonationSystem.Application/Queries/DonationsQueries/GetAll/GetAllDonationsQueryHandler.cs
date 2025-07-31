@@ -7,16 +7,16 @@ namespace BloodDonationSystem.Application.Queries.DonationsQueries.GetAll;
 
 public class GetAllDonationsQueryHandler : IRequestHandler<GetAllDonationsQuery, ResultViewModel<List<DonationItemViewModel>>>
 {
-    private readonly IRepositoryDonation _repository;
+    private readonly IDonationRepository _donationRepository;
 
-    public GetAllDonationsQueryHandler(IRepositoryDonation repository)
+    public GetAllDonationsQueryHandler(IDonationRepository donationRepository)
     {
-        _repository = repository;
+        _donationRepository = donationRepository;
     }
 
     public async Task<ResultViewModel<List<DonationItemViewModel>>> Handle(GetAllDonationsQuery request, CancellationToken cancellationToken)
     {
-        var donations = await _repository.GetAll();
+        var donations = await _donationRepository.GetAll();
 
         if (!donations.Any())
         {

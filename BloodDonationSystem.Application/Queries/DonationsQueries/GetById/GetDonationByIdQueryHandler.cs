@@ -7,9 +7,9 @@ namespace BloodDonationSystem.Application.Queries.DonationsQueries.GetById;
 
 public class GetDonationByIdQueryHandler : IRequestHandler<GetDonationByIdQuery, ResultViewModel<DonationViewModel>>
 {
-    private readonly IRepositoryDonation _donationRepository;
+    private readonly IDonationRepository _donationRepository;
 
-    public GetDonationByIdQueryHandler(IRepositoryDonation donationRepository)
+    public GetDonationByIdQueryHandler(IDonationRepository donationRepository)
     {
         _donationRepository = donationRepository;
     }

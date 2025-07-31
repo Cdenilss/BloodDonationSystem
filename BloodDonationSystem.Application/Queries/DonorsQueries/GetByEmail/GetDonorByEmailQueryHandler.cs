@@ -7,16 +7,16 @@ namespace BloodDonationSystem.Application.Queries.DonorsQueries.GetByEmail;
 
 public class GetDonorByEmailQueryHandler : IRequestHandler<GetDonorByEmailQuery, ResultViewModel<DonorViewModel>>
 {
-    private readonly IRepositoryDonor _repository;
+    private readonly IDonorRepository _donorRepository;
 
-    public GetDonorByEmailQueryHandler(IRepositoryDonor repository)
+    public GetDonorByEmailQueryHandler(IDonorRepository donorRepository)
     {
-        _repository = repository;
+        _donorRepository = donorRepository;
     }
 
     public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByEmailQuery request, CancellationToken cancellationToken)
     {
-        var donor = await _repository.GetDonorByEmail(request.Email);
+        var donor = await _donorRepository.GetDonorByEmail(request.Email);
         if (donor == null)
         {
             return ResultViewModel<DonorViewModel>.Error("Doador não encontrado");

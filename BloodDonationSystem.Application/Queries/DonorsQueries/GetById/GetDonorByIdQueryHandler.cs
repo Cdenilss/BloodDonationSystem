@@ -7,16 +7,16 @@ namespace BloodDonationSystem.Application.Queries.DonorsQueries.GetById;
 
 public class GetDonorByIdQueryHandler : IRequestHandler<GetDonorByIdQuery, ResultViewModel<DonorViewModel>>
 {
-    private readonly IRepositoryDonor _repository;
+    private readonly IDonorRepository _donorRepository;
 
-    public GetDonorByIdQueryHandler(IRepositoryDonor repository)
+    public GetDonorByIdQueryHandler(IDonorRepository donorRepository)
     {
-        _repository = repository;
+        _donorRepository = donorRepository;
     }
 
     public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByIdQuery request, CancellationToken cancellationToken)
     {
-        var donor = await _repository.GetDetailsById(request.Id);
+        var donor = await _donorRepository.GetDetailsById(request.Id);
         if (donor == null)
         {
             return ResultViewModel<DonorViewModel>.Error("Doador não encontrado");
