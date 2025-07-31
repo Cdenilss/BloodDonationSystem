@@ -5,11 +5,11 @@ namespace BloodDonationSystem.Application.Models.DTO;
 
 public class DonorItemViewModel
 {
-    public DonorItemViewModel(Guid id,string name, TypeBloodEnum typeBlood, RhFactorEnum rhFactor)
+    public DonorItemViewModel(Guid id,string name, BloodTypeEnum bloodType, RhFactorEnum rhFactor)
     {
         Id = id;
         Name = name;
-        TypeBlood = typeBlood;
+        BloodType = bloodType;
         RhFactor = rhFactor;
         
        
@@ -17,9 +17,9 @@ public class DonorItemViewModel
     public Guid Id { get; set; }
     public string Name { get; private set; }
     
-    public TypeBloodEnum TypeBlood { get; private set; }
+    public BloodTypeEnum BloodType { get; private set; }
     public RhFactorEnum RhFactor { get; private set; }
     
     public static DonorItemViewModel FromEntity(Donor donor)
-        => new(donor.Id,donor.Name, donor.TypeBlood, donor.RhFactor);
+        => new(donor.Id,donor.Name, donor.BloodType, donor.RhFactor);
 }

@@ -5,7 +5,7 @@ namespace BloodDonationSystem.Application.Models.DTO;
 
 public class DonorViewModel
 {
-    public DonorViewModel(Guid id,string name, string email, DateTime birthDate, GenderEnum gender, double weight, TypeBloodEnum typeBlood, RhFactorEnum rhFactor, List<DonationViewModel> donations, AddressViewModel address)
+    public DonorViewModel(Guid id,string name, string email, DateTime birthDate, GenderEnum gender, double weight, BloodTypeEnum bloodType, RhFactorEnum rhFactor, List<DonationViewModel> donations, AddressViewModel address)
     {
         Id = id;
         Name = name;
@@ -13,7 +13,7 @@ public class DonorViewModel
         BirthDate = birthDate;
         Gender = gender;
         Weight = weight;
-        TypeBlood = typeBlood;
+        BloodType = bloodType;
         RhFactor = rhFactor;
         Donations = donations;
         Address = address;
@@ -25,7 +25,7 @@ public class DonorViewModel
     public DateTime BirthDate { get; private set; }
     public GenderEnum Gender { get; private set; }
     public double Weight { get; private set; }
-    public TypeBloodEnum TypeBlood { get; private set; }
+    public BloodTypeEnum BloodType { get; private set; }
     public RhFactorEnum RhFactor { get; private set; }
     public List<DonationViewModel>? Donations { get; private set; }
     public AddressViewModel Address { get; private set; }
@@ -45,7 +45,7 @@ public class DonorViewModel
             donor.BirthDate,
             donor.Gender,
             donor.Weight,
-            donor.TypeBlood,
+            donor.BloodType,
             donor.RhFactor,
             // $"{donor.TypeBlood}{donor.RhFactor}", 
             donationViewModels,

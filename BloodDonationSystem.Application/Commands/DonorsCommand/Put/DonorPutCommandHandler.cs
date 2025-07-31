@@ -8,10 +8,10 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Put;
 public class DonorPutCommandHandler : IRequestHandler<DonorPutCommand, ResultViewModel>
 {
 
-    private readonly IRepositoryDonor _donor;
+    private readonly IDonorRepository _donor;
     private readonly IViaCepService _viaCepService;
 
-    public DonorPutCommandHandler(IRepositoryDonor donor, IViaCepService viaCepService)
+    public DonorPutCommandHandler(IDonorRepository donor, IViaCepService viaCepService)
     {
         _donor = donor;
         _viaCepService = viaCepService;

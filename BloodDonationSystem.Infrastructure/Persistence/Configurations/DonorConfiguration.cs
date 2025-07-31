@@ -31,7 +31,7 @@ public class DonorConfiguration : IEntityTypeConfiguration<Donor>
             .IsRequired()
             .HasColumnType("DECIMAL(5,2)");
        
-        builder.Property(d => d.TypeBlood)
+        builder.Property(d => d.BloodType)
             .IsRequired()
             .HasMaxLength(3);
         

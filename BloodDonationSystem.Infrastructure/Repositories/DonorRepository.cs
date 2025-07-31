@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonationSystem.Infrastructure.Repositories;
 
-public class DonorRepository : IRepositoryDonor
+public class DonorRepository : IDonorRepository
 
 {
     private readonly BloodDonationDbContext _context;
@@ -34,7 +34,7 @@ public class DonorRepository : IRepositoryDonor
     {
         var donor = await _context.Donors
             .Include(d => d.Address)
-            .Include(d => d.Donations)
+            .Include(d => d.Donations.Where(dd=> dd.IsDeleted == false))
             .FirstOrDefaultAsync(d => d.Email== email);
         return donor;
     }
@@ -43,7 +43,7 @@ public class DonorRepository : IRepositoryDonor
     {
         var donor = await _context.Donors
             .Include(d => d.Address)
-            .Include(d => d.Donations)
+            .Include(d => d.Donations.Where(dd=> dd.IsDeleted == false))
             .SingleOrDefaultAsync(d => d.Id == id);
         return donor;
     }
