@@ -32,7 +32,7 @@ public class Donor : BaseEntity
     public RhFactorEnum RhFactor { get; private set; }
     public List<Donation> Donations { get; private set; }
     public Address Address { get; private set; }
-    public Guid AddressId { get; set; }
+    
     
     
     public void Update(string name, string email)

@@ -41,7 +41,7 @@ public class CreateDonationCommandHandler : IRequestHandler<CreateDonationComman
             if (bloodStock != null)
             {
                 bloodStock.QuantityMl += request.QuantityMl;
-                _unitOfWork.BloodStocks.UpdateAsync(bloodStock);
+              _unitOfWork.BloodStocks.UpdateAsync(bloodStock);
             }
             else
             {
