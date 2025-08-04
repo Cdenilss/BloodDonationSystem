@@ -1,7 +1,8 @@
 using BloodDonationSystem.Application;
 using System.Text.Json.Serialization;
 using BloodDonationSystem.Application.Common.Converters;
-using BloodDonationSystem.Infrastructure; 
+using BloodDonationSystem.Infrastructure;
+using BloodDonationSystem.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,7 @@ builder.Services.AddApplicationServices();
 
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
