@@ -18,6 +18,6 @@ public class CreateDonationValidator : AbstractValidator<CreateDonationCommand>
             .GreaterThanOrEqualTo(DateTime.Today.AddYears(-100)).WithMessage("Data inválida.");
         
         RuleFor(cmd=> cmd.QuantityMl)
-            .InclusiveBetween(200, 473).WithMessage("A quantidade de sangue deve estar entre 420ml e 470ml.");
+            .InclusiveBetween(420, 473).WithMessage("A quantidade de sangue deve estar entre 420ml e 470ml.");
     }
 }
