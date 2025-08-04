@@ -51,6 +51,6 @@ public class BloodStockRepository : IBloodStockRepository
     public void UpdateAsync(BloodStock bloodStock)
     {
         
-        _context.BloodStocks.Update(bloodStock);
+       _context.BloodStocks.Update(bloodStock);
     }
 }
