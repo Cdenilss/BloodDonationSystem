@@ -26,8 +26,7 @@ public class Address : BaseEntity
     public string? Number { get; private set; }
     public string? Complement { get; private set; }
     public string District { get; private set;}
-
-    public Guid DonorId { get; private  set; }
+    
     public Donor? Donor { get; private  set; }
     
     public void Update(string street, string city, string state, string zipCode, string number, string? complement, string district)
