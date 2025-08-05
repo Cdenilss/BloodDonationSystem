@@ -1,16 +1,14 @@
 using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Models.ResultViewModel;
+using BloodDonationSystem.Core.Enum;
 
 namespace BloodDonationSystem.Application.Commands.BloodStockPutCommand.OutPut;
 
 public class OutputBloodStockCommand : IRequest<ResultViewModel>
 {
-    Guid Id { get; set; }
+      
+      public BloodTypeEnum BloodType { get; set; }
+      public RhFactorEnum RhFactor { get; set; }
+      public int QuantityMl { get; set; }
+      
 }
-
-//
-// public class OutputBloodStockCommandHandler : IRequestHandler<OutputBloodStockCommand, ResultViewModel>
-// {
-//     // public Task<ResultViewModel> Handle(OutputBloodStockCommand request, CancellationToken cancellationToken)
-//     // {
-//     // }
