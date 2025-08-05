@@ -18,7 +18,7 @@ public class DonationsController: ControllerBase
     }
     [HttpGet("GetAllDonations")]
     
-    public async Task<IActionResult> GetAllDonors()
+    public async Task<IActionResult> GetAllDonations()
     {
         
         var result = await _mediator.SendWithResponse( new GetAllDonationsQuery());
@@ -42,7 +42,7 @@ public class DonationsController: ControllerBase
             return BadRequest(result.Errors);
         }
         
-        return CreatedAtAction(nameof(GetAllDonors), new { id = result.Data}, command);
+        return CreatedAtAction(nameof(GetAllDonations), new { id = result.Data}, command);
     }
     
     [HttpDelete("{id:guid}")]

@@ -75,7 +75,7 @@ public class DonorsController: ControllerBase
         return CreatedAtAction(nameof(GetDonorById), new { id = result.Data }, command);
     }
     
-    [HttpPut("{search}")]
+    [HttpPut]
     
     public async Task<IActionResult> UpdateDonor(DonorPutCommand command)
     {
