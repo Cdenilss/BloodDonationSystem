@@ -1,4 +1,6 @@
+using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Services.ViaCep;
+using BloodDonationSystem.Core.DomainEvents;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastructure.Persistence;
 using BloodDonationSystem.Infrastructure.Repositories;
@@ -18,6 +20,8 @@ public static class InfraModule
         services.AddRepositoryies();
         services.AddUnitOfWork();
         services.AddExternalServices(configuration);
+        
+        
         return services;
     }
     
@@ -56,4 +60,6 @@ public static class InfraModule
         return services;
         
     }
+    
+    
 }
