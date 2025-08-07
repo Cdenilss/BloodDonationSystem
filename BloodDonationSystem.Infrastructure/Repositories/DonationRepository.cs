@@ -9,14 +9,11 @@ public class DonationRepository : IDonationRepository
 {
      
     private readonly BloodDonationDbContext _context;
-    private readonly IDonorRepository _donorRepository;
 
-   
-  
+
     public DonationRepository(BloodDonationDbContext context, IDonorRepository donorRepository)
     {
         _context = context;
-        _donorRepository = donorRepository;
     }
     
     public async Task<List<Donation>> GetAll()
@@ -53,7 +50,8 @@ public class DonationRepository : IDonationRepository
     public async Task Delete(Guid id)
     {
         var donation = await GetById(id);
-        donation.SetAsDeleted();
+            donation.SetAsDeleted();
+            
     }
 
     public async Task<Donation?> GetLastByDonorIdAsync(Guid donorId)
