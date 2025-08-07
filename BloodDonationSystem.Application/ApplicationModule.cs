@@ -3,6 +3,7 @@ using FluentValidation; // Para AddValidatorsFromAssembly
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using BloodDonationSystem.Application.Validators.DonationValidator;
+using BloodDonationSystem.Core.DomainEvents;
 
 namespace BloodDonationSystem.Application;
 
@@ -24,6 +25,5 @@ public static class ApplicationModule
         services.AddCustomMediator(typeof(ApplicationModule).Assembly);
         return services;
     }
-
     
 }
