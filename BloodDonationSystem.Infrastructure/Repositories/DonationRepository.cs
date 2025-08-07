@@ -53,9 +53,7 @@ public class DonationRepository : IDonationRepository
     public async Task Delete(Guid id)
     {
         var donation = await GetById(id);
-            donation.SetAsDeleted();
-            await _context.SaveChangesAsync();
-        
+        donation.SetAsDeleted();
     }
 
     public async Task<Donation?> GetLastByDonorIdAsync(Guid donorId)

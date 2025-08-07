@@ -18,14 +18,6 @@ public class BloodStockRepository : IBloodStockRepository
         _context = context;
     }
 
-    
-    public async Task Add(BloodStock bloodStock)
-    {
-        await _context.BloodStocks.AddAsync(bloodStock);
-    
-    }
-
-
     public async Task<List<BloodStock>> GetAllAsync()
     {
         var bloodStocks = await _context.BloodStocks

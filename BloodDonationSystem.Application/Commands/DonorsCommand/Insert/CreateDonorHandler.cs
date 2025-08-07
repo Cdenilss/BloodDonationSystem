@@ -9,12 +9,12 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Insert;
 
 public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultViewModel<Guid>>
 {
-    private readonly IDonorRepository _donorRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IViaCepService _viaCepService;
 
-    public CreateDonorHandler(IDonorRepository donorRepository, IViaCepService viaCepService)
+    public CreateDonorHandler(IUnitOfWork unitOfWork, IViaCepService viaCepService)
     {
-        _donorRepository = donorRepository;
+        _unitOfWork = unitOfWork;
         _viaCepService = viaCepService;
     }
 
@@ -33,7 +33,8 @@ public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultView
         );
      
         var donor = request.ToEntity(address);
-        await _donorRepository.Add(donor);
+        await _unitOfWork.Donors.Add(donor);
+        await _unitOfWork.CompleteAsync();
         return ResultViewModel<Guid>.Success(donor.Id);
     }
 }
