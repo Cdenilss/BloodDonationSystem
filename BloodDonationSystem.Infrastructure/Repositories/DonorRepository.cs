@@ -51,21 +51,17 @@ public class DonorRepository : IDonorRepository
     public async Task Add(Donor donor)
     {
         await _context.Donors.AddAsync(donor);
-        await _context.SaveChangesAsync(); 
-        
     }
 
-    public async Task Update(Donor donor)
+    public Task Update(Donor donor)
     {
         _context.Donors.Update(donor);
-        await _context.SaveChangesAsync();
+        return Task.CompletedTask;
     }
 
     public async Task Delete(Guid id)
     {
         var donor = await GetById(id);
         donor.SetAsDeleted();
-            await _context.SaveChangesAsync();
-        
     }
 }

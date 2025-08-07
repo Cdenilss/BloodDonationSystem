@@ -6,23 +6,24 @@ namespace BloodDonationSystem.Application.Commands.DonationsCommand.Delete;
 
 public class DeleteDonationCommandHandler : IRequestHandler<DeleteDonationCommand, ResultViewModel>
 {
-    private readonly IDonationRepository _donationRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteDonationCommandHandler(IDonationRepository donationRepository)
+    public DeleteDonationCommandHandler(IUnitOfWork unitOfWork)
     {
-        _donationRepository = donationRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ResultViewModel> Handle(DeleteDonationCommand request, CancellationToken cancellationToken)
     {
-        var donation = await _donationRepository.GetById(request.Id);
+        var donation = await _unitOfWork.Donations.GetById(request.Id);
         if (donation == null)
         {
             return ResultViewModel.Error("Donation not found.");
         }
 
-        await _donationRepository.Delete(donation.Id);
-        
+        await _unitOfWork.Donations.Delete(donation.Id);
+        await _unitOfWork.CompleteAsync();
+
         return ResultViewModel.Success();
     }
 }

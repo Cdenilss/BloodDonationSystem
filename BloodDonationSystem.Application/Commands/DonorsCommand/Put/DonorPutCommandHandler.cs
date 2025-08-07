@@ -8,19 +8,19 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Put;
 public class DonorPutCommandHandler : IRequestHandler<DonorPutCommand, ResultViewModel>
 {
 
-    private readonly IDonorRepository _donor;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IViaCepService _viaCepService;
 
-    public DonorPutCommandHandler(IDonorRepository donor, IViaCepService viaCepService)
+    public DonorPutCommandHandler(IUnitOfWork unitOfWork, IViaCepService viaCepService)
     {
-        _donor = donor;
+        _unitOfWork = unitOfWork;
         _viaCepService = viaCepService;
     }
 
 
     public async Task<ResultViewModel> Handle(DonorPutCommand request, CancellationToken cancellationToken)
     {
-        var donor = await _donor.GetDonorByEmail(request.Email);
+        var donor = await _unitOfWork.Donors.GetDonorByEmail(request.Email);
         if (donor == null)
         {
             return ResultViewModel.Error("Doador não encontrado");
@@ -48,7 +48,8 @@ public class DonorPutCommandHandler : IRequestHandler<DonorPutCommand, ResultVie
 
             );
         }
-        await _donor.Update(donor);
+        await _unitOfWork.Donors.Update(donor);
+        await _unitOfWork.CompleteAsync();
         return ResultViewModel.Success();
     }
 
