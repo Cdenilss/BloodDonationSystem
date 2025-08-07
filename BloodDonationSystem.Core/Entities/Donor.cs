@@ -41,4 +41,6 @@ public class Donor : BaseEntity
         Email = email;
         
     }
+    
+    
 }
