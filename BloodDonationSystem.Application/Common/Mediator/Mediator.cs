@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using BloodDonationSystem.Core.DomainEvents;
 
 namespace BloodDonationSystem.Application.Common.Mediator;
 
@@ -56,5 +57,15 @@ public class Mediator : IMediator
         {
             await handler.Handle(notification, cancellationToken);
         }
+    }
+
+    public Task PublishDomainEvent(IDomainEvent domainEvent)
+    {
+        var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
+        var handlers = _serviceProvider.GetServices(handlerType);
+
+        var tasks = handlers.Select(handler => (Task)handlerType.GetMethod("Handle")!.Invoke(handler, new object[] { domainEvent, CancellationToken.None })!);
+        
+        return Task.WhenAll(tasks);
     }
 }
