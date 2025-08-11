@@ -35,29 +35,25 @@ public class BloodDonationDbContext : DbContext
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         
-        int result= await base.SaveChangesAsync(cancellationToken); 
+        var result= await base.SaveChangesAsync(cancellationToken); 
         
-        await PublishDomainEvents();
+        await PublishDomainEvents(cancellationToken);
         
         return result;
     }
     
-    private async Task PublishDomainEvents()
+    private async Task PublishDomainEvents(CancellationToken ct)
     {
-        var domainEntities = ChangeTracker
-            .Entries<IAggregateRoot>()
+        var domainEntities = ChangeTracker.Entries<IAggregateRoot>()
             .Where(e => e.Entity.DomainEvents.Any())
             .Select(e => e.Entity)
             .ToList();
 
-        var domainEvents = domainEntities
-            .SelectMany(e => e.DomainEvents)
-            .ToList();
+        var events = domainEntities.SelectMany(e => e.DomainEvents).ToList();
+        domainEntities.ForEach(e => e.ClearDomainEvents());
 
-        foreach (var domainEvent in domainEvents)
-        {
-            await _mediator.PublishDomainEvent(domainEvent); // método custom
-        }
+        foreach (var ev in events)
+            await _mediator.PublishDomainEvent(ev, ct);
     }
    
     }

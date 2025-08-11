@@ -22,9 +22,9 @@ public class OutputBloodStockCommandHandler : IRequestHandler<OutputBloodStockCo
             return ResultViewModel.Error("Blood stock not found.");
         }
             
-        bloodStock.QuantityMl -= request.QuantityMl;
+        
+        bloodStock.Draw(request.QuantityMl);
         _unitOfWork.BloodStocks.UpdateAsync(bloodStock);
-            
         await _unitOfWork.CompleteAsync();
         return ResultViewModel.Success();
            

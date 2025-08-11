@@ -59,13 +59,17 @@ public class Mediator : IMediator
         }
     }
 
-    public Task PublishDomainEvent(IDomainEvent domainEvent)
+  
+    public Task PublishDomainEvent(IDomainEvent domainEvent,CancellationToken cancellationToken = default)
     {
         var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
         var handlers = _serviceProvider.GetServices(handlerType);
-
-        var tasks = handlers.Select(handler => (Task)handlerType.GetMethod("Handle")!.Invoke(handler, new object[] { domainEvent, CancellationToken.None })!);
-        
+        var tasks = handlers.Select(h =>
+        {
+            var method = handlerType.GetMethod("Handle")!;
+            return (Task)method.Invoke(h, new object[] { domainEvent, cancellationToken })!;
+        });
         return Task.WhenAll(tasks);
     }
+    
 }
