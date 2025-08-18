@@ -15,7 +15,7 @@ public class BloodStockTests
         var rhFactor = _faker.PickRandom<RhFactorEnum>();
         var quantity = _faker.Random.Int(100, 1000);
 
-        var stock = new BloodStock(bloodType, rhFactor, quantity);
+        var stock = new BloodStock(bloodType, rhFactor, quantity, 1500);
 
         Assert.Equal(bloodType, stock.BloodType);
         Assert.Equal(rhFactor, stock.RhFactor);
