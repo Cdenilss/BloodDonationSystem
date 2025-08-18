@@ -2,7 +2,11 @@ using BloodDonationSystem.Application.Common.Mediator; // Para AddCustomMediator
 using FluentValidation; // Para AddValidatorsFromAssembly
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using BloodDonationSystem.Application.Events;
+using BloodDonationSystem.Application.Events.BloodStockEvent;
 using BloodDonationSystem.Application.Validators.DonationValidator;
+using BloodDonationSystem.Core.Common.DomainEvents;
+using BloodDonationSystem.Core.Common.Events.BloodStockEvents;
 
 namespace BloodDonationSystem.Application;
 
@@ -15,6 +19,9 @@ public static class ApplicationModule
         services.AddValidatorsFromAssembly(typeof(ApplicationModule).Assembly);
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         services.AddScoped<IDonationEligibilityValidator, DonationEligibilityValidator>();
+        services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+        services.AddScoped<IDomainEventHandler<BloodStockBecameLowEvent>, BloodStockBecameLowEventHandler>();
+
 
         return services;
     }
@@ -24,6 +31,7 @@ public static class ApplicationModule
         services.AddCustomMediator(typeof(ApplicationModule).Assembly);
         return services;
     }
+
 
     
 }
