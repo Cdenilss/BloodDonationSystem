@@ -45,4 +45,5 @@ public class BloodStockRepository : IBloodStockRepository
         
        _context.BloodStocks.Update(bloodStock);
     }
+    
 }
