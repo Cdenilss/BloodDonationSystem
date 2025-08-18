@@ -1,8 +1,10 @@
 using BloodDonationSystem.Application.Commands.BloodStockPutCommand.OutPut;
 using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Queries.BloodSrocksQueries;
+using BloodDonationSystem.Application.Queries.BloodSrocksQueries.BloodStockReports;
 using BloodDonationSystem.Core.Enum;
 using Microsoft.AspNetCore.Mvc;
+using QuestPDF.Fluent;
 
 namespace BloodDonationSystem.Controllers;
 
@@ -42,6 +44,22 @@ public class BloodStocksController : ControllerBase
 
             return NoContent();
         }
+    [HttpGet("GetReportBloodStocks")]
+    public async Task<IActionResult> GetReportBloodStocks()
+    {
+
+        var result = await _mediator.SendWithResponse(new GetReportQuery());
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
+        var report = new BloodStockReport(result.Data);
+        var pdf = report.GeneratePdf(); // byte[]
+        return File(pdf, "application/pdf", "BloodStockReport.pdf");
+
+       
     }
+    }
+
 
 
