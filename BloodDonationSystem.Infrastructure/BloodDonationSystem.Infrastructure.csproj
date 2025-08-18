@@ -11,6 +11,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Auth\" />
+        <Folder Include="Services\HostedService\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,12 +23,25 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.17" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+        <PackageReference Include="QuestPDF" Version="2025.7.0" />
         <PackageReference Include="SendGrid" Version="9.29.3" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\BloodDonationSystem.Application\BloodDonationSystem.Application.csproj" />
         <ProjectReference Include="..\BloodDonationSystem.Core\BloodDonationSystem.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="DomainEvents\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="DomainEvents\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="DomainEvents\**" />
     </ItemGroup>
 
 </Project>
