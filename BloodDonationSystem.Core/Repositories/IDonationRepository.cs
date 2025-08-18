@@ -10,4 +10,5 @@ public interface IDonationRepository
     Task Add(Donation donation);
     Task Delete(Guid id);
     Task<Donation?> GetLastByDonorIdAsync(Guid donorId);
+    Task<List<Donation>> GetAllLast30DaysDonation();
 }
