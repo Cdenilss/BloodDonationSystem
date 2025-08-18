@@ -63,4 +63,17 @@ public class DonationRepository : IDonationRepository
             .OrderByDescending(d => d.DateDonation)
             .FirstOrDefaultAsync();
     }
+    
+    public async Task<List<Donation>> GetAllLast30DaysDonation()
+    {
+        var donations = await _context.Donations
+            .Where(d => d.IsDeleted == false)
+            .Where(d => d.DateDonation >= DateTime.Now.AddDays(-30))
+            .OrderByDescending(d => d.DateDonation)
+            .Include(d => d.Donor)
+            .AsNoTracking()
+            .ToListAsync();
+        
+        return donations;
+    }
 }

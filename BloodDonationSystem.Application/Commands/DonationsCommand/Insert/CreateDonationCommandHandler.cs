@@ -45,7 +45,7 @@ public class CreateDonationCommandHandler : IRequestHandler<CreateDonationComman
             }
             else
             {
-                bloodStock = new BloodStock(donor.BloodType,donor.RhFactor, request.QuantityMl);
+                bloodStock = new BloodStock(donor.BloodType, donor.RhFactor, request.QuantityMl, 1500);
                 await _unitOfWork.BloodStocks.AddAsync(bloodStock);
                 
             }

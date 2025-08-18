@@ -1,8 +1,12 @@
 using BloodDonationSystem.Application.Commands.DonationsCommand.Delete;
 using BloodDonationSystem.Application.Commands.DonationsCommand.Insert;
 using BloodDonationSystem.Application.Common.Mediator;
+using BloodDonationSystem.Application.Queries.DonationsQueries.GellAllLast30DaysDonations;
 using BloodDonationSystem.Application.Queries.DonationsQueries.GetAll;
+using BloodDonationSystem.Core.Repositories;
+using BloodDonationSystem.Infrastructure.Reports;
 using Microsoft.AspNetCore.Mvc;
+using QuestPDF.Fluent;
 
 namespace BloodDonationSystem.Controllers;
 [Route("api/donations")]
@@ -12,9 +16,11 @@ public class DonationsController: ControllerBase
 {
     
     private readonly IMediator _mediator;
-    public DonationsController(IMediator mediator)
+    private readonly IDonationRepository _donationRepository;
+    public DonationsController(IMediator mediator, IDonationRepository donationRepository)
     {
         _mediator = mediator;
+        _donationRepository = donationRepository;
     }
     [HttpGet("GetAllDonations")]
     
@@ -58,4 +64,22 @@ public class DonationsController: ControllerBase
         
         return NoContent();
     }
+    
+    [HttpGet("Reports donation")]
+    public async Task<IActionResult> GetReportOf30Days()
+    {
+    
+        var result = await _mediator.SendWithResponse(new GetAllLast30DaysQuery());
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Errors);
+        }
+        
+    
+        var report = new LastDonationsDetails(result.Data);
+        var pdf = report.GeneratePdf(); // byte[]
+        return File(pdf, "application/pdf", "donations.pdf");
+    }
+
+
 }
