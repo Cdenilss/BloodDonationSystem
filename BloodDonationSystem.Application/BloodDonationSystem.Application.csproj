@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\DonorEvents\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions">
       <HintPath>..\BloodDonationSystem.API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
