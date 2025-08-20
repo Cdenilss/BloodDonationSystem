@@ -3,6 +3,8 @@ using BloodDonationSystem.Core.Enum;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
+namespace BloodDonationSystem.Infrastructure.Reports;
+
 public class BloodStockReport : IDocument
 {
     public IReadOnlyList<BloodStockItemViewModel> Stocks { get; }
