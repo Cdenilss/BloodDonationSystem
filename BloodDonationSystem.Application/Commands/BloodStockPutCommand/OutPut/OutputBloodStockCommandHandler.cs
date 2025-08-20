@@ -14,8 +14,8 @@ public class OutputBloodStockCommandHandler : IRequestHandler<OutputBloodStockCo
         var stock = await _unitOfWork.BloodStocks.GetByTypeAsync(request.BloodType, request.RhFactor);
         if (stock is null) return ResultViewModel.Error("Blood stock not found.");
 
-        stock.Draw(request.QuantityMl);              
-        await _unitOfWork.CompleteAsync();           
+        stock.Draw(request.QuantityMl);
+        await _unitOfWork.CompleteAsync();
         return ResultViewModel.Success();
     }
 }

@@ -1,3 +1,5 @@
 namespace BloodDonationSystem.Core.Common.DomainEvents;
 
-public interface IDomainEvent{}
+public interface IDomainEvent
+{
+}
