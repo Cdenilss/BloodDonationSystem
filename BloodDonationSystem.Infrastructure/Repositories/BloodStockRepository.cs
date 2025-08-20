@@ -1,4 +1,3 @@
- 
 using BloodDonationSystem.Core.Entities;
 using BloodDonationSystem.Core.Enum;
 using BloodDonationSystem.Core.Repositories;
@@ -10,7 +9,6 @@ namespace BloodDonationSystem.Infrastructure.Repositories;
 
 public class BloodStockRepository : IBloodStockRepository
 {
-
     private readonly BloodDonationDbContext _context;
 
     public BloodStockRepository(BloodDonationDbContext context)
@@ -29,21 +27,19 @@ public class BloodStockRepository : IBloodStockRepository
 
     public async Task<BloodStock?> GetByTypeAsync(BloodTypeEnum bloodType, RhFactorEnum rhFactor)
     {
-       var bloodStock= await _context.BloodStocks.FirstOrDefaultAsync(bs=> bs.BloodType == bloodType && bs.RhFactor == rhFactor);
-       
-       return bloodStock;
+        var bloodStock =
+            await _context.BloodStocks.FirstOrDefaultAsync(bs => bs.BloodType == bloodType && bs.RhFactor == rhFactor);
+
+        return bloodStock;
     }
 
     public async Task AddAsync(BloodStock bloodStock)
     {
         await _context.AddAsync(bloodStock);
-        
     }
-    
+
     public void UpdateAsync(BloodStock bloodStock)
     {
-        
-       _context.BloodStocks.Update(bloodStock);
+        _context.BloodStocks.Update(bloodStock);
     }
-    
 }

@@ -4,7 +4,8 @@ namespace BloodDonationSystem.Core.Entities;
 
 public class Donor : BaseEntity
 {
-    public Donor(string name, string email, DateTime birthDate, GenderEnum gender, double weight, BloodTypeEnum bloodType, RhFactorEnum rhFactor, Address address)
+    public Donor(string name, string email, DateTime birthDate, GenderEnum gender, double weight,
+        BloodTypeEnum bloodType, RhFactorEnum rhFactor, Address address)
     {
         Name = name;
         Email = email;
@@ -32,13 +33,11 @@ public class Donor : BaseEntity
     public RhFactorEnum RhFactor { get; private set; }
     public List<Donation> Donations { get; private set; }
     public Address Address { get; private set; }
-    
-    
-    
+
+
     public void Update(string name, string email)
     {
         Name = name;
         Email = email;
-        
     }
 }

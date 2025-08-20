@@ -5,6 +5,5 @@ namespace BloodDonationSystem.Application.Validators.DonationValidator;
 
 public interface IDonationEligibilityValidator
 {
-        Task<ResultViewModel> ValidateAsync(Donor donor, DateTime newDonationDate);
-    
+    Task<ResultViewModel> ValidateAsync(Donor donor, DateTime newDonationDate);
 }

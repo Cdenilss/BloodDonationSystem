@@ -14,7 +14,8 @@ public class GetDonorByIdQueryHandler : IRequestHandler<GetDonorByIdQuery, Resul
         _donorRepository = donorRepository;
     }
 
-    public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByIdQuery request,
+        CancellationToken cancellationToken)
     {
         var donor = await _donorRepository.GetDetailsById(request.Id);
         if (donor == null)

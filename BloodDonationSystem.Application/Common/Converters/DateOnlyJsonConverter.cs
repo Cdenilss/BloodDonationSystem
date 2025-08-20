@@ -24,13 +24,14 @@ public class DateOnlyJsonConverter : JsonConverter<DateTime>
         }
 
         var dateString = reader.GetString();
-        
+
         // Tenta converter a string para DateTime usando o formato esperado.
         if (DateTime.TryParseExact(dateString, Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
         {
             return date;
         }
 
-        throw new JsonException($"Não foi possível converter '{dateString}' para uma data. O formato esperado é '{Format}'.");
+        throw new JsonException(
+            $"Não foi possível converter '{dateString}' para uma data. O formato esperado é '{Format}'.");
     }
 }

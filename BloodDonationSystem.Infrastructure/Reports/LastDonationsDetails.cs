@@ -10,7 +10,7 @@ public class LastDonationsDetails : IDocument
 
     public LastDonationsDetails(IReadOnlyList<DonationViewModel> donations)
     {
-        QuestPDF.Settings.License= LicenseType.Community;
+        QuestPDF.Settings.License = LicenseType.Community;
         Donations = donations ?? throw new ArgumentNullException(nameof(donations));
     }
 
@@ -40,7 +40,6 @@ public class LastDonationsDetails : IDocument
                     h.Cell().Text("Blood").SemiBold();
                     h.Cell().Text("RhFactor").SemiBold();
                     h.Cell().Text("Qty (ml)").SemiBold();
-                   
                 });
 
                 foreach (var d in Donations)
@@ -50,16 +49,13 @@ public class LastDonationsDetails : IDocument
                     table.Cell().Text(d.Donor.BloodType);
                     table.Cell().Text(d.Donor.RhFactor);
                     table.Cell().Text(d.QuantityMl.ToString());
-                    
-                    
                 }
+
                 table.Cell().Text("Total").SemiBold();
                 table.Cell().Text(Donations.Count.ToString()).SemiBold();
                 table.Cell().Text("Total Blood").SemiBold();
                 table.Cell().Text(Donations.Sum(d => d.QuantityMl).ToString()).SemiBold();
                 table.Cell().Text("ml").SemiBold();
-                
-                
             });
 
             page.Footer().AlignRight().Text($"Generated at {DateTime.Now:dd/MM/yyyy HH:mm}");

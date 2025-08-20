@@ -6,7 +6,7 @@ public interface IDonorRepository
 {
     Task<List<Donor>> GetAll();
     Task<Donor> GetById(Guid id);
-    
+
     Task<Donor> GetDonorByEmail(string email);
     Task<Donor> GetDetailsById(Guid id);
     Task Add(Donor donor);

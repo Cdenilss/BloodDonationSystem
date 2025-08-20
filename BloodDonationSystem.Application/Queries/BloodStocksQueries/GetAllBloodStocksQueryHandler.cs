@@ -5,7 +5,9 @@ using BloodDonationSystem.Core.Repositories;
 
 namespace BloodDonationSystem.Application.Queries.BloodStocksQueries;
 
-public class GetAllBloodStocksQueryHandler : IRequestHandler<GetAllBloodStocksQuery, ResultViewModel<List<BloodStockItemViewModel>>>
+public class
+    GetAllBloodStocksQueryHandler : IRequestHandler<GetAllBloodStocksQuery,
+    ResultViewModel<List<BloodStockItemViewModel>>>
 {
     private readonly IBloodStockRepository _bloodStockRepository;
 
@@ -14,7 +16,8 @@ public class GetAllBloodStocksQueryHandler : IRequestHandler<GetAllBloodStocksQu
         _bloodStockRepository = bloodStockRepository;
     }
 
-    public async Task<ResultViewModel<List<BloodStockItemViewModel>>> Handle(GetAllBloodStocksQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<List<BloodStockItemViewModel>>> Handle(GetAllBloodStocksQuery request,
+        CancellationToken cancellationToken)
     {
         var stocks = await _bloodStockRepository.GetAllAsync();
 

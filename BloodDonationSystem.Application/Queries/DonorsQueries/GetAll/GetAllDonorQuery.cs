@@ -6,5 +6,4 @@ namespace BloodDonationSystem.Application.Queries.DonorsQueries.GetAll;
 
 public class GetAllDonorQuery : IRequest<ResultViewModel<List<DonorItemViewModel>>>
 {
-    
 }

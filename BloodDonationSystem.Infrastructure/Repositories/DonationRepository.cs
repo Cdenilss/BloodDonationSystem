@@ -7,18 +7,16 @@ namespace BloodDonationSystem.Infrastructure.Repositories;
 
 public class DonationRepository : IDonationRepository
 {
-     
     private readonly BloodDonationDbContext _context;
     private readonly IDonorRepository _donorRepository;
 
-   
-  
+
     public DonationRepository(BloodDonationDbContext context, IDonorRepository donorRepository)
     {
         _context = context;
         _donorRepository = donorRepository;
     }
-    
+
     public async Task<List<Donation>> GetAll()
     {
         var donations = await _context.Donations
@@ -39,15 +37,14 @@ public class DonationRepository : IDonationRepository
     public async Task<List<Donation>> GetByDonorId(Guid donorId)
     {
         return await _context.Donations
-            .Where(d => d.DonorId == donorId) 
-            .AsNoTracking() 
+            .Where(d => d.DonorId == donorId)
+            .AsNoTracking()
             .ToListAsync();
     }
 
     public async Task Add(Donation donation)
     {
         await _context.Donations.AddAsync(donation);
-        
     }
 
     public async Task Delete(Guid id)
@@ -63,7 +60,7 @@ public class DonationRepository : IDonationRepository
             .OrderByDescending(d => d.DateDonation)
             .FirstOrDefaultAsync();
     }
-    
+
     public async Task<List<Donation>> GetAllLast30DaysDonation()
     {
         var donations = await _context.Donations
@@ -73,7 +70,7 @@ public class DonationRepository : IDonationRepository
             .Include(d => d.Donor)
             .AsNoTracking()
             .ToListAsync();
-        
+
         return donations;
     }
 }

@@ -5,7 +5,8 @@ using BloodDonationSystem.Core.Repositories;
 
 namespace BloodDonationSystem.Application.Queries.DonationsQueries.GetAll;
 
-public class GetAllDonationsQueryHandler : IRequestHandler<GetAllDonationsQuery, ResultViewModel<List<DonationItemViewModel>>>
+public class
+    GetAllDonationsQueryHandler : IRequestHandler<GetAllDonationsQuery, ResultViewModel<List<DonationItemViewModel>>>
 {
     private readonly IDonationRepository _donationRepository;
 
@@ -14,7 +15,8 @@ public class GetAllDonationsQueryHandler : IRequestHandler<GetAllDonationsQuery,
         _donationRepository = donationRepository;
     }
 
-    public async Task<ResultViewModel<List<DonationItemViewModel>>> Handle(GetAllDonationsQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<List<DonationItemViewModel>>> Handle(GetAllDonationsQuery request,
+        CancellationToken cancellationToken)
     {
         var donations = await _donationRepository.GetAll();
 
@@ -22,9 +24,9 @@ public class GetAllDonationsQueryHandler : IRequestHandler<GetAllDonationsQuery,
         {
             return ResultViewModel<List<DonationItemViewModel>>.Error("Lista de Doações Vazia");
         }
-        
+
         var model = donations.Select(d => DonationItemViewModel.FromEntity(d)).ToList();
-        
+
         return ResultViewModel<List<DonationItemViewModel>>.Success(model);
     }
 }

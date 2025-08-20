@@ -14,7 +14,8 @@ public class GetDonorByEmailQueryHandler : IRequestHandler<GetDonorByEmailQuery,
         _donorRepository = donorRepository;
     }
 
-    public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByEmailQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByEmailQuery request,
+        CancellationToken cancellationToken)
     {
         var donor = await _donorRepository.GetDonorByEmail(request.Email);
         if (donor == null)

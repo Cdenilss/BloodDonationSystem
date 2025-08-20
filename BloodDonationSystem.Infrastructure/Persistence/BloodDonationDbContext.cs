@@ -1,7 +1,6 @@
 using System.Reflection;
 using BloodDonationSystem.Application.Events;
 using BloodDonationSystem.Core.Common.AggregateRoots;
-
 using BloodDonationSystem.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,12 +12,13 @@ public class BloodDonationDbContext : DbContext
     // {
     // }
     private readonly IDomainEventDispatcher _dispatcher;
+
     public BloodDonationDbContext(DbContextOptions options, IDomainEventDispatcher dispatcher)
         : base(options) => _dispatcher = dispatcher;
-    
+
     public DbSet<Donor> Donors { get; set; }
     public DbSet<Donation> Donations { get; set; }
-    public DbSet<BloodStock>BloodStocks { get; set; }
+    public DbSet<BloodStock> BloodStocks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,7 +26,7 @@ public class BloodDonationDbContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
-    
+
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
         var result = await base.SaveChangesAsync(ct);
@@ -42,14 +42,14 @@ public class BloodDonationDbContext : DbContext
             .Select(e => e.Entity)
             .ToList();
 
-        var events = aggregates.SelectMany(a => a.DomainEvents).ToList(); 
+        var events = aggregates.SelectMany(a => a.DomainEvents).ToList();
         aggregates.ForEach(a => a.ClearDomainEvents());
         if (events.Count > 0)
         {
-            Console.WriteLine($"[DOMAIN] Dispatching {events.Count} event(s): {string.Join(", ", events.Select(e => e.GetType().Name))}");
+            Console.WriteLine(
+                $"[DOMAIN] Dispatching {events.Count} event(s): {string.Join(", ", events.Select(e => e.GetType().Name))}");
         }
 
         await _dispatcher.DispatchAsync(events, ct);
     }
-    
 }

@@ -13,16 +13,16 @@ namespace BloodDonationSystem.Controllers;
 
 [Route("api/donors")]
 [ApiController]
-
-public class DonorsController: ControllerBase
+public class DonorsController : ControllerBase
 {
     private readonly IMediator _mediator;
+
     public DonorsController(IMediator mediator)
     {
         _mediator = mediator;
     }
+
     [HttpGet("GetAllDonors")]
-    
     public async Task<IActionResult> GetAllDonors()
     {
         var result = await _mediator.SendWithResponse(new GetAllDonorQuery());
@@ -30,23 +30,24 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
+
         return Ok(result.Data);
     }
-    
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDonorById(Guid id)
     {
-      
         var result = await _mediator.SendWithResponse(new GetDonorByIdQuery(id));
 
         if (!result.IsSuccess)
         {
             return BadRequest();
         }
-            return Ok(result);
+
+        return Ok(result);
     }
-    
+
     [HttpGet("GetDonorByEmail")]
     public async Task<IActionResult> GetDonorByEmail(string email)
     {
@@ -56,12 +57,11 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
-        
+
         return Ok(result);
     }
-    
-    
-    
+
+
     [HttpPost]
     public async Task<IActionResult> AddDonor(CreateDonorCommand command)
     {
@@ -71,12 +71,11 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
-        
+
         return CreatedAtAction(nameof(GetDonorById), new { id = result.Data }, command);
     }
-    
+
     [HttpPut]
-    
     public async Task<IActionResult> UpdateDonor(DonorPutCommand command)
     {
         var result = await _mediator.SendWithResponse(command);
@@ -85,12 +84,12 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
-        
+
         return NoContent();
     }
-    
+
     [HttpDelete]
-    public async Task<IActionResult> DeleteDonor( string email)
+    public async Task<IActionResult> DeleteDonor(string email)
     {
         var result = await _mediator.SendWithResponse(new DeleteDonorCommand(email));
 
@@ -98,10 +97,7 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
-        
+
         return NoContent();
-        
-        
     }
 }
-

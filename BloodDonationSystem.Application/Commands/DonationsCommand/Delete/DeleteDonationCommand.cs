@@ -11,5 +11,4 @@ public class DeleteDonationCommand : IRequest<ResultViewModel>
     }
 
     public Guid Id { get; private set; }
-    
 }

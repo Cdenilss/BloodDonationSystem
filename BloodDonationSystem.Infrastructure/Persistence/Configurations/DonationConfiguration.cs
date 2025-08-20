@@ -10,21 +10,18 @@ public class DonationConfiguration : IEntityTypeConfiguration<Donation>
     {
         builder.ToTable("Donations");
         builder.HasKey(dd => dd.Id);
-        
+
         builder.Property(dd => dd.DateDonation)
             .IsRequired();
         builder.Property(dd => dd.QuantityMl)
             .IsRequired();
-        
+
         builder.Property(dd => dd.DonorId)
             .IsRequired();
-        
-        builder.HasOne(d => d.Donor)         
-            .WithMany(d => d.Donations)       
-            .HasForeignKey(d => d.DonorId)    
-            .OnDelete(DeleteBehavior.Cascade); 
 
-
-
+        builder.HasOne(d => d.Donor)
+            .WithMany(d => d.Donations)
+            .HasForeignKey(d => d.DonorId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

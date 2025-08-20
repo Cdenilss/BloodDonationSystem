@@ -6,5 +6,4 @@ namespace BloodDonationSystem.Application.Queries.BloodStocksQueries;
 
 public class GetAllBloodStocksQuery : IRequest<ResultViewModel<List<BloodStockItemViewModel>>>
 {
-    
 }

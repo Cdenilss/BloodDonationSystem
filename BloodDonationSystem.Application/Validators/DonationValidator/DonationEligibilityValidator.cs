@@ -5,7 +5,7 @@ using BloodDonationSystem.Core.Repositories;
 
 namespace BloodDonationSystem.Application.Validators.DonationValidator;
 
-public class DonationEligibilityValidator: IDonationEligibilityValidator
+public class DonationEligibilityValidator : IDonationEligibilityValidator
 {
     private readonly IDonationRepository _donationRepository;
 
@@ -31,6 +31,7 @@ public class DonationEligibilityValidator: IDonationEligibilityValidator
         {
             return ResultViewModel.Error("Doador é menor de idade e não pode realizar uma doação.");
         }
+
         return ResultViewModel.Success();
     }
 
@@ -45,9 +46,10 @@ public class DonationEligibilityValidator: IDonationEligibilityValidator
         if (daysSinceLastDonation < requiredInterval)
         {
             var nextDate = lastDonation.DateDonation.AddDays(requiredInterval);
-            return ResultViewModel.Error($"Intervalo mínimo para doação não foi atingido. Próxima doação possível a partir de {nextDate:dd-MM-yyyy}.");
+            return ResultViewModel.Error(
+                $"Intervalo mínimo para doação não foi atingido. Próxima doação possível a partir de {nextDate:dd-MM-yyyy}.");
         }
-        
+
         return ResultViewModel.Success();
     }
 }

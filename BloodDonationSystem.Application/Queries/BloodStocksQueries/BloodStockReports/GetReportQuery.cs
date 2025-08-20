@@ -5,14 +5,12 @@ using BloodDonationSystem.Core.Repositories;
 
 namespace BloodDonationSystem.Application.Queries.BloodSrocksQueries.BloodStockReports;
 
-public class GetReportQuery: IRequest<ResultViewModel<List<BloodStockItemViewModel>>>
+public class GetReportQuery : IRequest<ResultViewModel<List<BloodStockItemViewModel>>>
 {
-    
 }
 
-public class GellReportQueryHandler:  IRequestHandler<GetReportQuery, ResultViewModel<List<BloodStockItemViewModel>>>
+public class GellReportQueryHandler : IRequestHandler<GetReportQuery, ResultViewModel<List<BloodStockItemViewModel>>>
 {
-    
     private readonly IUnitOfWork _unitOfWork;
 
     public GellReportQueryHandler(IUnitOfWork unitOfWork)
@@ -21,7 +19,8 @@ public class GellReportQueryHandler:  IRequestHandler<GetReportQuery, ResultView
     }
 
 
-    public async Task<ResultViewModel<List<BloodStockItemViewModel>>> Handle(GetReportQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<List<BloodStockItemViewModel>>> Handle(GetReportQuery request,
+        CancellationToken cancellationToken)
     {
         var stocks = await _unitOfWork.BloodStocks.GetAllAsync();
 

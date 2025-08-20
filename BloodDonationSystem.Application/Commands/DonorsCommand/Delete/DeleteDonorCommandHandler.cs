@@ -15,7 +15,7 @@ public class DeleteDonorCommandHandler : IRequestHandler<DeleteDonorCommand, Res
 
     public async Task<ResultViewModel> Handle(DeleteDonorCommand request, CancellationToken cancellationToken)
     {
-        var donor= await _unitOfWork.Donors.GetDonorByEmail(request.Email);
+        var donor = await _unitOfWork.Donors.GetDonorByEmail(request.Email);
         if (donor == null)
         {
             return ResultViewModel.Error("Doador não encontrado");
@@ -23,6 +23,6 @@ public class DeleteDonorCommandHandler : IRequestHandler<DeleteDonorCommand, Res
 
         await _unitOfWork.Donors.Delete(donor.Id);
         await _unitOfWork.CompleteAsync();
-       return ResultViewModel.Success();
+        return ResultViewModel.Success();
     }
 }

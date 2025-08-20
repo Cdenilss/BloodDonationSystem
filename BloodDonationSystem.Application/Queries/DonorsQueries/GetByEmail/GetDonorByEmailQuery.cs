@@ -12,5 +12,4 @@ public class GetDonorByEmailQuery : IRequest<ResultViewModel<DonorViewModel>>
     }
 
     public string Email { get; private set; }
-    
 }

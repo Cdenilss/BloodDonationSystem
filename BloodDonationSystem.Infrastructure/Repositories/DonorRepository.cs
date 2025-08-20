@@ -9,6 +9,7 @@ public class DonorRepository : IDonorRepository
 
 {
     private readonly BloodDonationDbContext _context;
+
     public DonorRepository(BloodDonationDbContext context)
     {
         _context = context;
@@ -18,7 +19,6 @@ public class DonorRepository : IDonorRepository
     {
         var donors = await _context.Donors
             .Where(d => d.IsDeleted == false)
-            
             .AsNoTracking()
             .ToListAsync();
         return donors;
@@ -26,7 +26,7 @@ public class DonorRepository : IDonorRepository
 
     public async Task<Donor> GetById(Guid id)
     {
-        var donor= await _context.Donors.FirstOrDefaultAsync(d=> d.Id==id);
+        var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Id == id);
         return donor;
     }
 
@@ -34,8 +34,8 @@ public class DonorRepository : IDonorRepository
     {
         var donor = await _context.Donors
             .Include(d => d.Address)
-            .Include(d => d.Donations.Where(dd=> dd.IsDeleted == false))
-            .FirstOrDefaultAsync(d => d.Email== email);
+            .Include(d => d.Donations.Where(dd => dd.IsDeleted == false))
+            .FirstOrDefaultAsync(d => d.Email == email);
         return donor;
     }
 
@@ -43,7 +43,7 @@ public class DonorRepository : IDonorRepository
     {
         var donor = await _context.Donors
             .Include(d => d.Address)
-            .Include(d => d.Donations.Where(dd=> dd.IsDeleted == false))
+            .Include(d => d.Donations.Where(dd => dd.IsDeleted == false))
             .SingleOrDefaultAsync(d => d.Id == id);
         return donor;
     }

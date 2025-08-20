@@ -24,7 +24,6 @@ public class BloodStocksController : ControllerBase
     [HttpGet("GetAllBloodStocks")]
     public async Task<IActionResult> GetAllBloodStocks()
     {
-
         var result = await _mediator.SendWithResponse(new GetAllBloodStocksQuery());
         if (!result.IsSuccess)
         {
@@ -35,33 +34,29 @@ public class BloodStocksController : ControllerBase
     }
 
     [HttpPut("bloodDraw")]
-        public async Task<IActionResult> BloodDraw(OutputBloodStockCommand command)
+    public async Task<IActionResult> BloodDraw(OutputBloodStockCommand command)
+    {
+        var result = await _mediator.SendWithResponse(command);
+
+        if (!result.IsSuccess)
         {
-            var result = await _mediator.SendWithResponse(command);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return NoContent();
+            return BadRequest(result.Errors);
         }
+
+        return NoContent();
+    }
+
     [HttpGet("GetReportBloodStocks")]
     public async Task<IActionResult> GetReportBloodStocks()
     {
-
         var result = await _mediator.SendWithResponse(new GetReportQuery());
         if (!result.IsSuccess)
         {
             return BadRequest(result.Errors);
         }
+
         var report = new BloodStockReport(result.Data);
         var pdf = report.GeneratePdf(); // byte[]
         return File(pdf, "application/pdf", "BloodStockReport.pdf");
-
-       
     }
-    }
-
-
-
+}

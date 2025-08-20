@@ -5,10 +5,10 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Delete;
 
 public class DeleteDonorCommand : IRequest<ResultViewModel>
 {
-    public DeleteDonorCommand( string email)
+    public DeleteDonorCommand(string email)
     {
         Email = email;
     }
+
     public string Email { get; set; }
-    
 }

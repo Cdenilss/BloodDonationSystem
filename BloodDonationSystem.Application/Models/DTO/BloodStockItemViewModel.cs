@@ -2,9 +2,11 @@ using BloodDonationSystem.Core.Entities;
 using BloodDonationSystem.Core.Enum;
 
 namespace BloodDonationSystem.Application.Models.DTO;
+
 public class BloodStockItemViewModel
 {
-    public BloodStockItemViewModel(Guid id, BloodTypeEnum bloodType, RhFactorEnum rhFactor, int quantityMl, int minimumSafeQuantity)
+    public BloodStockItemViewModel(Guid id, BloodTypeEnum bloodType, RhFactorEnum rhFactor, int quantityMl,
+        int minimumSafeQuantity)
     {
         Id = id;
         BloodType = bloodType;

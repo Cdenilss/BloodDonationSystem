@@ -18,7 +18,6 @@ public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultView
         _viaCepService = viaCepService;
     }
 
-  
 
     public async Task<ResultViewModel<Guid>> Handle(CreateDonorCommand request, CancellationToken cancellationToken)
     {
@@ -29,14 +28,13 @@ public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultView
         }
 
         var address = addressData.ToEntity(
-            request.AddressNumber, 
-             request.AddressComplement
+            request.AddressNumber,
+            request.AddressComplement
         );
-     
+
         var donor = request.ToEntity(address);
         await _unitOfWork.Donors.Add(donor);
         await _unitOfWork.CompleteAsync();
         return ResultViewModel<Guid>.Success(donor.Id);
     }
 }
-

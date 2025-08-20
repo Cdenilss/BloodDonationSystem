@@ -1,15 +1,14 @@
-
 using BloodDonationSystem.Core.Common.Events.BloodStockEvents;
 using Microsoft.Extensions.Logging;
 
 
 namespace BloodDonationSystem.Application.Events.BloodStockEvent;
 
-
 public sealed class BloodStockBecameLowEventHandler
     : IDomainEventHandler<BloodStockBecameLowEvent>
 {
     private readonly ILogger<BloodStockBecameLowEventHandler> _logger;
+
     public BloodStockBecameLowEventHandler(ILogger<BloodStockBecameLowEventHandler> logger)
         => _logger = logger;
 

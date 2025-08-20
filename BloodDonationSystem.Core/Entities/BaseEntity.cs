@@ -4,21 +4,20 @@ using BloodDonationSystem.Core.Common.DomainEvents;
 
 namespace BloodDonationSystem.Core.Entities;
 
-
-    public abstract class BaseEntity : IAggregateRoot
+public abstract class BaseEntity : IAggregateRoot
+{
+    public BaseEntity()
     {
-        public BaseEntity()
-        {
-            Id = Guid.NewGuid();
-            CreatedAt = DateTime.Now;
-            IsDeleted = false;
-        }
+        Id = Guid.NewGuid();
+        CreatedAt = DateTime.Now;
+        IsDeleted = false;
+    }
 
-        public Guid Id { get; set; }
-        public DateTime CreatedAt { get; private set; }
-        public bool IsDeleted { get; set; }
+    public Guid Id { get; set; }
+    public DateTime CreatedAt { get; private set; }
+    public bool IsDeleted { get; set; }
 
-        public void SetAsDeleted()
+    public void SetAsDeleted()
     {
         IsDeleted = true;
     }

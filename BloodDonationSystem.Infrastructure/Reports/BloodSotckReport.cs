@@ -13,7 +13,6 @@ public class BloodStockReport : IDocument
     {
         Stocks = stocks;
         QuestPDF.Settings.License = LicenseType.Community;
-        
     }
 
     public void Compose(IDocumentContainer container)
@@ -32,7 +31,8 @@ public class BloodStockReport : IDocument
             {
                 foreach (var item in Stocks)
                 {
-                    var typeLabel = $"Tipo sanguíneo {item.BloodType}{(item.RhFactor == RhFactorEnum.Positive ? "+" : "-")}";
+                    var typeLabel =
+                        $"Tipo sanguíneo {item.BloodType}{(item.RhFactor == RhFactorEnum.Positive ? "+" : "-")}";
                     col.Item().Text($"{typeLabel} : {item.QuantityMl} ml").FontSize(14);
                 }
 

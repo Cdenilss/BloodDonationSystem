@@ -4,7 +4,7 @@ using BloodDonationSystem.Application.Models.ResultViewModel;
 using BloodDonationSystem.Core.Entities;
 
 namespace BloodDonationSystem.Application.Queries.DonationsQueries.GellAllLast30DaysDonations;
-public class GetAllLast30DaysQuery :  IRequest<ResultViewModel<List<DonationViewModel>>>
+
+public class GetAllLast30DaysQuery : IRequest<ResultViewModel<List<DonationViewModel>>>
 {
-    
 }

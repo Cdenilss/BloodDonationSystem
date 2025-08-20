@@ -18,17 +18,20 @@ public class Mediator : IMediator
         _serviceProvider = serviceProvider;
     }
 
-    public async Task<TResponse> SendWithResponse<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
+    public async Task<TResponse> SendWithResponse<TResponse>(IRequest<TResponse> request,
+        CancellationToken cancellationToken = default)
     {
         var handlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
         var handler = _serviceProvider.GetRequiredService(handlerType);
 
         var method = _handlerMethods.GetOrAdd(handlerType, t => t.GetMethod("Handle")!);
 
-        var behaviors = _serviceProvider.GetServices(typeof(IPipelineBehavior<,>).MakeGenericType(request.GetType(), typeof(TResponse)))
-                                        .Cast<object>().ToList();
+        var behaviors = _serviceProvider
+            .GetServices(typeof(IPipelineBehavior<,>).MakeGenericType(request.GetType(), typeof(TResponse)))
+            .Cast<object>().ToList();
 
-        RequestHandlerDelegate<TResponse> handlerDelegate = () => (Task<TResponse>)method.Invoke(handler, new object[] { request, cancellationToken })!;
+        RequestHandlerDelegate<TResponse> handlerDelegate = () =>
+            (Task<TResponse>)method.Invoke(handler, new object[] { request, cancellationToken })!;
 
         foreach (var behavior in behaviors.Reverse<object>())
         {
@@ -39,7 +42,8 @@ public class Mediator : IMediator
         return await handlerDelegate();
     }
 
-    public Task Send<TRequest>(TRequest request, CancellationToken cancellationToken = default) where TRequest : IRequest
+    public Task Send<TRequest>(TRequest request, CancellationToken cancellationToken = default)
+        where TRequest : IRequest
     {
         var handlerType = typeof(IRequestHandler<>).MakeGenericType(typeof(TRequest));
         var handler = _serviceProvider.GetRequiredService(handlerType);
@@ -49,7 +53,8 @@ public class Mediator : IMediator
         return (Task)method.Invoke(handler, new object[] { request, cancellationToken })!;
     }
 
-    public async Task Publish<TNotification>(TNotification notification, CancellationToken cancellationToken = default) where TNotification : INotification
+    public async Task Publish<TNotification>(TNotification notification, CancellationToken cancellationToken = default)
+        where TNotification : INotification
     {
         var handlers = _serviceProvider.GetServices<INotificationHandler<TNotification>>();
         foreach (var handler in handlers)

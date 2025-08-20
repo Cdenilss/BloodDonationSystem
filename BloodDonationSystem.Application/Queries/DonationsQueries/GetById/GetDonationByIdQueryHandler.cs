@@ -14,14 +14,15 @@ public class GetDonationByIdQueryHandler : IRequestHandler<GetDonationByIdQuery,
         _donationRepository = donationRepository;
     }
 
-    public async Task<ResultViewModel<DonationViewModel>>  Handle(GetDonationByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<DonationViewModel>> Handle(GetDonationByIdQuery request,
+        CancellationToken cancellationToken)
     {
         var donation = await _donationRepository.GetById(request.Id);
         if (donation == null)
         {
             return ResultViewModel<DonationViewModel>.Error("Donation not found.");
         }
-        
+
         var donationViewModel = DonationViewModel.FromEntity(donation);
 
         return ResultViewModel<DonationViewModel>.Success(donationViewModel);

@@ -7,7 +7,6 @@ namespace BloodDonationSystem.Application.Commands.DonorsCommand.Put;
 
 public class DonorPutCommandHandler : IRequestHandler<DonorPutCommand, ResultViewModel>
 {
-
     private readonly IUnitOfWork _unitOfWork;
     private readonly IViaCepService _viaCepService;
 
@@ -45,13 +44,11 @@ public class DonorPutCommandHandler : IRequestHandler<DonorPutCommand, ResultVie
                 request.AddressNumber,
                 request.AddressComplement,
                 addressData.Bairro
-
             );
         }
+
         await _unitOfWork.Donors.Update(donor);
         await _unitOfWork.CompleteAsync();
         return ResultViewModel.Success();
     }
-
-
 }

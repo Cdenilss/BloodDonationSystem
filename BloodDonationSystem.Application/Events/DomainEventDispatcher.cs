@@ -5,7 +5,6 @@ namespace BloodDonationSystem.Application.Events;
 
 public sealed class DomainEventDispatcher : IDomainEventDispatcher
 {
-
     private readonly IServiceProvider _sp;
     public DomainEventDispatcher(IServiceProvider sp) => _sp = sp;
 
@@ -15,9 +14,9 @@ public sealed class DomainEventDispatcher : IDomainEventDispatcher
         {
             var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(e.GetType());
             var handlers = _sp.GetServices(handlerType);
-            
+
             // Console.WriteLine($"[DOMAIN] Found {handlers.Count} handler(s) for {e.GetType().Name}");
-            
+
             foreach (var h in handlers)
             {
                 var method = handlerType.GetMethod("Handle")!;

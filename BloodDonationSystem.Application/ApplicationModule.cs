@@ -14,7 +14,6 @@ public static class ApplicationModule
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-   
         services.AddCustomMediatorFromAssembly();
         services.AddValidatorsFromAssembly(typeof(ApplicationModule).Assembly);
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
@@ -31,7 +30,4 @@ public static class ApplicationModule
         services.AddCustomMediator(typeof(ApplicationModule).Assembly);
         return services;
     }
-
-
-    
 }

@@ -6,10 +6,10 @@ using FluentValidation;
 
 namespace BloodDonationSystem.Application.Validators.BloodStockValidators;
 
-public class BloodStockDrawValidator: AbstractValidator<OutputBloodStockCommand>
+public class BloodStockDrawValidator : AbstractValidator<OutputBloodStockCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    
+
     public BloodStockDrawValidator(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -25,16 +25,12 @@ public class BloodStockDrawValidator: AbstractValidator<OutputBloodStockCommand>
             .IsInEnum().WithMessage("O fator Rh é obrigatório e deve ser válido.");
         RuleFor(cmd => cmd).MustAsync(HaveEnoughStockAsync)
             .WithMessage("Estoque insuficiente para o tipo sanguíneo solicitado.");
-
-        
-        
     }
-    
+
     private async Task<bool> HaveEnoughStockAsync(OutputBloodStockCommand cmd, CancellationToken cancellationToken)
     {
-       var bloodStock = await _unitOfWork.BloodStocks.GetByTypeAsync(cmd.BloodType, cmd.RhFactor);
-       var available = bloodStock?.QuantityMl >= cmd.QuantityMl;
+        var bloodStock = await _unitOfWork.BloodStocks.GetByTypeAsync(cmd.BloodType, cmd.RhFactor);
+        var available = bloodStock?.QuantityMl >= cmd.QuantityMl;
         return available;
     }
-    
 }
