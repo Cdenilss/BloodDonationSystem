@@ -18,6 +18,6 @@ public class DonationViewModel
         QuantityMl = quantityMl;
     }
     public static DonationViewModel FromEntity(Donation donation)
-        => new(donation.DonorId, donation.DateDonation, donation.QuantityMl, DonorItemViewModel.FromEntity(donation.Donor));
+        => new(donation.Id, donation.DateDonation, donation.QuantityMl, DonorItemViewModel.FromEntity(donation.Donor));
 
 }
