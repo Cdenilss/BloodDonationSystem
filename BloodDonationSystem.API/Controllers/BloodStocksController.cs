@@ -2,7 +2,9 @@ using BloodDonationSystem.Application.Commands.BloodStockPutCommand.OutPut;
 using BloodDonationSystem.Application.Common.Mediator;
 using BloodDonationSystem.Application.Queries.BloodSrocksQueries;
 using BloodDonationSystem.Application.Queries.BloodSrocksQueries.BloodStockReports;
+using BloodDonationSystem.Application.Queries.BloodStocksQueries;
 using BloodDonationSystem.Core.Enum;
+using BloodDonationSystem.Infrastructure.Reports;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 
