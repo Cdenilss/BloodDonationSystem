@@ -30,7 +30,7 @@ public class DonorsController: ControllerBase
         {
             return BadRequest(result.Errors);
         }
-        return Ok(result);
+        return Ok(result.Data);
     }
     
 
