@@ -18,6 +18,8 @@ public class CreateDonorHandler : IRequestHandler<CreateDonorCommand, ResultView
         _viaCepService = viaCepService;
     }
 
+  
+
     public async Task<ResultViewModel<Guid>> Handle(CreateDonorCommand request, CancellationToken cancellationToken)
     {
         var addressData = await _viaCepService.GetAddressByCepAsync(request.Cep);
