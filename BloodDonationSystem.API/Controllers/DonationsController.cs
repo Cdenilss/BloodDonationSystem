@@ -65,7 +65,7 @@ public class DonationsController: ControllerBase
         return NoContent();
     }
     
-    [HttpGet("Reports donation")]
+    [HttpGet("reports/donations/last30days")]
     public async Task<IActionResult> GetReportOf30Days()
     {
     
