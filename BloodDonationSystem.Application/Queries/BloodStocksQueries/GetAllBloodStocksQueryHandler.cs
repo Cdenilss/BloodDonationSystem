@@ -3,7 +3,7 @@ using BloodDonationSystem.Application.Models.DTO;
 using BloodDonationSystem.Application.Models.ResultViewModel;
 using BloodDonationSystem.Core.Repositories;
 
-namespace BloodDonationSystem.Application.Queries.BloodSrocksQueries;
+namespace BloodDonationSystem.Application.Queries.BloodStocksQueries;
 
 public class GetAllBloodStocksQueryHandler : IRequestHandler<GetAllBloodStocksQuery, ResultViewModel<List<BloodStockItemViewModel>>>
 {
