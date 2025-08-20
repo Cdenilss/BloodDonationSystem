@@ -19,18 +19,13 @@ namespace BloodDonationSystem.Core.Entities;
         public bool IsDeleted { get; set; }
 
         public void SetAsDeleted()
-        {
-            IsDeleted = true;
-        }
-
-        [NotMapped] private readonly List<IDomainEvent> _domainEvents = new();
-        [NotMapped] public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-
-        protected void AddDomainEvent(IDomainEvent @event) => _domainEvents.Add(@event);
-        public void ClearDomainEvents() => _domainEvents.Clear();
-       
+    {
+        IsDeleted = true;
     }
 
-    
+    [NotMapped] private readonly List<IDomainEvent> _domainEvents = new();
+    [NotMapped] public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
- 
+    protected void AddDomainEvent(IDomainEvent @event) => _domainEvents.Add(@event);
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
