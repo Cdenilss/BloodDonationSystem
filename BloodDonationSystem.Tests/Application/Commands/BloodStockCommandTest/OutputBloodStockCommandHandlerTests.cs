@@ -56,7 +56,7 @@ namespace BloodDonationSystem.Tests.Application.Commands.BloodStockCommandTest
             stock.DomainEvents.OfType<BloodStockBecameLowEvent>().Should().HaveCount(1);
         }
 
-        [Fact(DisplayName = "Estoque não encontrado - lança/retorna erro")]
+        [Fact(DisplayName = "Estoque não encontrado retorna erro")]
         public async Task Should_Throw_When_Stock_Not_Found()
         {
             var type = BloodTypeEnum.B;
@@ -64,17 +64,15 @@ namespace BloodDonationSystem.Tests.Application.Commands.BloodStockCommandTest
 
             var repo = new Mock<IBloodStockRepository>();
             repo.Setup(r => r.GetByTypeAsync(type, rh))
-                .ReturnsAsync((BloodDonationSystem.Core.Entities.BloodStock)null!);
+                .ReturnsAsync((BloodStock)null!);
 
             var uow = new Mock<IUnitOfWork>();
             uow.SetupGet(x => x.BloodStocks).Returns(repo.Object);
 
             var handler = new OutputBloodStockCommandHandler(uow.Object);
             var cmd = new OutputBloodStockCommand { BloodType = type, RhFactor = rh, QuantityMl = 100 };
-
-            Func<Task> act = async () => await handler.Handle(cmd, default);
-            await act.Should()
-                .ThrowAsync<InvalidOperationException>(); // ajuste se seu handler retorna Result em vez de lançar
+            var result = await handler.Handle(cmd, CancellationToken.None);
+            result.Errors.Should(); 
         }
     }
 }

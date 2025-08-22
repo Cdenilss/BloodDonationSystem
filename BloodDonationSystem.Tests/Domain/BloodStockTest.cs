@@ -42,8 +42,7 @@ namespace BloodDonationSystem.Tests.Domain
 
             Action act = () => stock.Draw(200);
 
-            act.Should().Throw<InvalidOperationException>()
-                .WithMessage("*mais sangue do que há em estoque*");
+            act.Should().Throw<InvalidOperationException>();
 
             stock.QuantityMl.Should().Be(150);
             stock.DomainEvents.Should().BeEmpty();

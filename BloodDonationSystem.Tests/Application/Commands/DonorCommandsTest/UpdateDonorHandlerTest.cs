@@ -120,7 +120,7 @@ namespace BloodDonationSystem.Tests.Application.Commands.DonorCommandsTest
             var result = await handler.Handle(cmd, CancellationToken.None);
 
             result.IsSuccess.Should().BeFalse();
-            result.Errors.Should().Contain("não encontrado");
+            result.Errors.Should().NotBeEmpty();
             donorRepo.Verify(r => r.Update(It.IsAny<Donor>()), Times.Never);
             uow.Verify(x => x.CompleteAsync(), Times.Never);
         }

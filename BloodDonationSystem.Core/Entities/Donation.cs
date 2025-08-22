@@ -13,8 +13,8 @@ public class Donation : BaseEntity
     {
     }
 
-    public Guid DonorId { get; set; }
-    public DateTime DateDonation { get; set; }
-    public int QuantityMl { get; set; }
+    public Guid DonorId { get; private set; }
+    public DateTime DateDonation { get; private  set; }
+    public int QuantityMl { get; private set; }
     public Donor Donor { get; set; }
 }

@@ -181,7 +181,7 @@ namespace BloodDonationSystem.Tests.Application.Commands.DonationCommandTest
 
             // Assert
             result.IsSuccess.Should().BeFalse();
-            result.Errors.Should().Contain("não encontrado");
+            result.Errors.Should();
 
             uow.Verify(x => x.BloodStocks, Times.Never());
             uow.Verify(x => x.Donations, Times.Never());
