@@ -1,73 +1,106 @@
+# 🩸 BloodDonationSystem
 
+**BloodDonationSystem** é uma API RESTful desenvolvida em **.NET 8** como parte de um estudo prático de **Clean Architecture**, **DDD** e **CQRS**.  
+O objetivo é fornecer um sistema robusto para gerenciar **todo o ciclo de doação de sangue** — desde o cadastro de doadores, passando pelo registro de doações, até o controle de estoque por tipo sanguíneo e fator Rh.  
 
-# 🩸 BloodDonationSystem - Sistema de Gestão de Doação de Sangue
+Mais do que código, este projeto serviu como **laboratório de boas práticas de arquitetura** e aplicação de padrões avançados no ecossistema .NET.  
 
-![.NET](https://img.shields.io/badge/.NET-8-blueviolet)
-![C#](https://img.shields.io/badge/C%23-11-green)
-![Arquitetura](https://img.shields.io/badge/Arquitetura-Limpa-orange)
-![Padrão](https://img.shields.io/badge/Padrão-CQRS%20%7C%20Mediator-blue)
-
-## 🎯 Sobre o Projeto
-
-**BloodDonationSystem** é uma API RESTful desenvolvida em .NET 8 como parte de um treinamento prático, com o objetivo de criar um sistema robusto para gerenciar todo o ciclo de doação de sangue. A aplicação facilita o cadastro e a gestão de doadores, o controle de estoque de bolsas de sangue e o registro de doações, aplicando regras de negócio essenciais para garantir a segurança e a conformidade do processo.
-
-Este projeto é um estudo de caso prático da aplicação de **Clean Architecture**, **Domain-Driven Design (DDD)** e **CQRS** no ecossistema .NET.
+---
 
 ## ✨ Funcionalidades Principais
 
-* **Gestão de Doadores:**
-    * CRUD completo para doadores.
-    * Validação de dados de entrada na criação e atualização de doadores.
-    * Integração com a API [ViaCEP](https://viacep.com.br/) para preenchimento automático de endereço.
-* **Registro de Doações:**
-    * Endpoint para registrar novas doações.
-    * Validações de regras de negócio complexas (idade mínima, intervalo entre doações baseado no gênero).
-* **Controle de Estoque de Sangue:**
-    * (Em desenvolvimento) Gestão de bolsas de sangue por tipo sanguíneo e fator Rh.
-* **Arquitetura Robusta:**
-    * Pipeline de validação customizado com FluentValidation e Mediator.
-    * Middleware global para tratamento de exceções, retornando respostas de erro padronizadas.
+### 👤 Gestão de Doadores
+- CRUD completo para doadores.  
+- Validação de dados com **FluentValidation**.  
+- Integração com a **API ViaCEP** para preenchimento automático de endereço.  
+
+### 🩸 Registro de Doações
+- Registro de novas doações associadas ao doador.  
+- **Regras de negócio implementadas**:
+  - Idade mínima do doador.  
+  - Intervalo entre doações (60 dias para homens, 90 dias para mulheres).  
+  - Peso mínimo de 50 kg.  
+- Atualização automática do estoque ao registrar doação.  
+
+### 🏪 Controle de Estoque de Sangue
+- Gestão de estoque por tipo sanguíneo + fator Rh.  
+- Operação de **saída de bolsas de sangue** (`Draw`), validada por:
+  - Quantidade positiva (1–500ml).  
+  - Estoque suficiente.  
+- Disparo de **Domain Events** (`BloodStockBecameLowEvent`) quando o estoque cruza o limite mínimo seguro.  
+
+### 🔧 Arquitetura Robusta
+- **Mediator customizado** para aplicar CQRS sem dependências externas.  
+- **Pipeline Behavior + FluentValidation** → validação automática e centralizada.  
+- **Unit of Work** para garantir transações atômicas.  
+- **Domain Events** para desacoplar notificações de baixo estoque.  
+- Middleware global para tratamento de exceções com respostas padronizadas.  
+
+---
 
 ## 🏛️ Arquitetura e Padrões de Design
 
-O projeto foi estruturado seguindo os princípios da **Clean Architecture**, dividindo as responsabilidades em quatro projetos principais:
+O projeto segue **Clean Architecture**, dividido em quatro camadas:  
 
-* **`Core`**: Contém as entidades de domínio, enums, e as interfaces dos repositórios. É o coração da aplicação, sem dependências externas.
-* **`Application`**: Orquestra os casos de uso. Contém os Comandos, Queries (CQRS), Handlers, DTOs e a lógica de validação.
-* **`Infrastructure`**: Implementa as interfaces definidas no Core. É responsável pela persistência de dados (Entity Framework Core), consumo de serviços externos e outros detalhes de infraestrutura.
-* **`API`**: Expõe a aplicação para o mundo exterior através de uma API REST, utilizando Controllers para receber as requisições e o Mediator para encaminhá-las.
+- **Core** → Entidades de domínio, enums, eventos e contratos de repositórios.  
+- **Application** → Casos de uso (Commands, Queries, Handlers), DTOs, validações e orquestração da lógica de negócio.  
+- **Infrastructure** → Implementação de repositórios (EF Core), serviços externos (ViaCEP) e persistência.  
+- **API** → Exposição dos endpoints REST usando Controllers e integração com o Mediator.  
 
-### Padrões Implementados:
+### Padrões implementados
+- **CQRS**: separação clara entre leitura e escrita.  
+- **Mediator Pattern**: roteamento de comandos e queries sem acoplamento.  
+- **Repository Pattern**: abstração de acesso a dados.  
+- **Unit of Work**: coordenação de transações atômicas.  
+- **Domain Events**: notificação de regras críticas de negócio (estoque baixo).  
+- **Dependency Injection**: usada em toda a aplicação.  
+- **Middleware**: tratamento global de exceções.  
 
-* **CQRS (Command Query Responsibility Segregation):** Usamos um Mediator customizado para separar claramente os comandos (operações de escrita) das queries (operações de leitura).
-* **Mediator Pattern:** Para desacoplar o envio de requisições da sua execução, evitando a dependência direta entre Controllers e Handlers.
-* **Repository Pattern:** Para abstrair a camada de acesso a dados.
-* **Dependency Injection (DI):** Utilizado extensivamente em todo o projeto para gerenciar as dependências de forma limpa.
-* **Middleware:** Para tratar de responsabilidades transversais, como o tratamento global de exceções.
+---
+
+## 🧪 Testes Automatizados
+
+O projeto conta com uma **suíte robusta de testes unitários**, implementados com:  
+
+- **xUnit** → framework de testes.  
+- **FluentAssertions** → asserts legíveis e expressivos.  
+- **Moq** → mocks para repositórios e serviços externos.  
+- **Bogus** → geração de dados consistentes e determinísticos.  
+
+🔍 Cobertura principal:
+- **Domínio**: `Donor.Update`, `BloodStock.Draw` (invariantes e Domain Events).  
+- **Validators**: `CreateDonorValidator`, `CreateDonationValidator`, `BloodStockDrawValidator`.  
+- **Handlers**: `CreateDonorHandler`, `DonorPutCommandHandler`, `CreateDonationCommandHandler`, `OutputBloodStockCommandHandler`.  
+- **Infra**: integração com **ViaCEP** mockada em testes.  
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Backend:**
-    * .NET 8
-    * ASP.NET Core
-    * Entity Framework Core 8
-* **Banco de Dados:**
-    * SQL Server (configurado para uso local)
-* **Validação:**
-    * FluentValidation
-* **Testes (em breve):**
-    * xUnit
-    * Moq
+**Backend**  
+- .NET 8  
+- ASP.NET Core  
+- Entity Framework Core 8  
+
+**Banco de Dados**  
+- SQL Server (configuração local ou Docker)  
+
+**Validação**  
+- FluentValidation  
+
+**Testes**  
+- xUnit  
+- Moq  
+- FluentAssertions  
+- Bogus  
+
+---
 
 ## 🚀 Como Executar o Projeto Localmente
 
-Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
-
 ### Pré-requisitos
-
-* [.NET 8 SDK](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0)
-* Um servidor SQL Server (pode ser via Docker ou instalado localmente).
-
+- .NET 8 SDK  
+- SQL Server (local ou via Docker)  
 ### Passos
 
 1.  **Clone o repositório:**
@@ -100,13 +133,12 @@ Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
 5.  **Acesse a Documentação da API:**
     Com a aplicação rodando, acesse `http://localhost:PORTA/swagger` no seu navegador para ver e testar os endpoints disponíveis.
 
-## 🗺️ Roadmap Futuro
+## ✅ Status
 
-Este projeto está em constante evolução. Os próximos passos planejados são:
+📌 **Projeto finalizado como estudo prático**:  
+- [x] Aplicação de arquitetura limpa, DDD e CQRS  
+- [x] Regras de negócio encapsuladas no domínio  
+- [x] Integração com serviço externo (ViaCEP)  
+- [x] Testes cobrindo cenários principais  
 
-* [ ] Implementar o padrão **Unit of Work** para garantir transações atômicas.
-* [ ] Criar **Hosted Services** para executar tarefas em background (ex: alertas de estoque baixo).
-* [ ] Utilizar **Domain Events** para desacoplar os módulos do sistema.
-* [ ] Desenvolver uma suíte completa de **Testes Unitários e de Integração**.
-* [ ] Implementar **autenticação e autorização** com JWT
-      
+👨‍💻 Aberto para feedbacks, sugestões e contribuições!
